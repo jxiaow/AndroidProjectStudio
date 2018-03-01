@@ -7,23 +7,35 @@ import android.text.TextUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import cn.xwj.base.BaseActivity;
 import cn.xwj.ioc.annotation.CheckNet;
 import cn.xwj.ioc.annotation.OnClick;
 import cn.xwj.ioc.annotation.ViewById;
 import cn.xwj.ioc.inject.Injector;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     @ViewById(R.id.tv)
     private TextView mTextView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Injector.inject(this);
+    protected void initData() {
 
+    }
+
+    @Override
+    protected void initView() {
         mTextView.setText("你好");
+    }
+
+    @Override
+    protected void initTitle() {
+
+    }
+
+    @Override
+    protected void setContentView() {
+        setContentView(R.layout.activity_main);
     }
 
     @CheckNet(methodName = "show")
