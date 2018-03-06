@@ -27,4 +27,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation project(':base-library')
     implementation 'cn.xwj:easy:1.2.4'
+    implementation 'com.alipay.euler:andfix:0.5.0@aar'
 }
