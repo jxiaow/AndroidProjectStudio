@@ -1,4 +1,4 @@
-package cn.xwj.base.ioc;
+package cn.xwj.ioc;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

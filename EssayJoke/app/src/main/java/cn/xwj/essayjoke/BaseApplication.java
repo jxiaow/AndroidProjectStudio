@@ -1,11 +1,13 @@
 package cn.xwj.essayjoke;
 
 import android.app.Application;
+import android.util.Log;
 
 import com.alipay.euler.andfix.patch.PatchManager;
 
-import cn.xwj.base.crash.CrashExceptionHandler;
-import cn.xwj.base.util.Utils;
+import cn.xwj.crash.CrashExceptionHandler;
+import cn.xwj.fixbug.FixDexManager;
+import cn.xwj.util.Utils;
 import cn.xwj.easy.E;
 
 /**
@@ -15,18 +17,20 @@ import cn.xwj.easy.E;
  */
 
 public class BaseApplication extends Application {
-    public static PatchManager sPatchManager;
+    private static final String TAG = "BaseApplication";
+    public static FixDexManager sFixDexManager;
 
     @Override
     public void onCreate() {
         super.onCreate();
         E.context(this);
-        CrashExceptionHandler.getInstance().init(this);
-        sPatchManager = new PatchManager(this);
-        String version = Utils.getAppVersion(this);
-        if (version != null) {
-            sPatchManager.init(version);
-            sPatchManager.loadPatch();
+        sFixDexManager = new FixDexManager(this);
+        try {
+            sFixDexManager.loadFixDex();
+            Log.d(TAG, "sFixDexManager 加载完毕");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
     }
 }

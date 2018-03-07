@@ -1,4 +1,4 @@
-package cn.xwj.base.ioc;
+package cn.xwj.ioc;
 
 import android.app.Activity;
 import android.content.Context;

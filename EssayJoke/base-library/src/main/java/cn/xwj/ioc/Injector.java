@@ -1,4 +1,4 @@
-package cn.xwj.base.ioc;
+package cn.xwj.ioc;
 
 import android.app.Activity;
 import android.support.v4.app.Fragment;
@@ -10,9 +10,9 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashSet;
 
-import cn.xwj.base.ioc.annotation.ContentView;
-import cn.xwj.base.ioc.annotation.OnClick;
-import cn.xwj.base.ioc.annotation.ViewById;
+import cn.xwj.ioc.annotation.ContentView;
+import cn.xwj.ioc.annotation.OnClick;
+import cn.xwj.ioc.annotation.ViewById;
 
 /**
  * Author: xw

@@ -1,4 +1,4 @@
-package cn.xwj.base.crash;
+package cn.xwj.crash;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

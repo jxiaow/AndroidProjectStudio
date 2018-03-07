@@ -1,4 +1,4 @@
-package cn.xwj.base.ioc.annotation;
+package cn.xwj.ioc.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

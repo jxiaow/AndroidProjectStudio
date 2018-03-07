@@ -1,4 +1,4 @@
-package cn.xwj.base.util;
+package cn.xwj.util;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;

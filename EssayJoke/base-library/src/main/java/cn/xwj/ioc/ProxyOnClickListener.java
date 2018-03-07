@@ -1,4 +1,4 @@
-package cn.xwj.base.ioc;
+package cn.xwj.ioc;
 
 import android.text.TextUtils;
 import android.view.View;
@@ -6,7 +6,7 @@ import android.widget.Toast;
 
 import java.lang.reflect.Method;
 
-import cn.xwj.base.ioc.annotation.CheckNet;
+import cn.xwj.ioc.annotation.CheckNet;
 
 /**
  * Author: xw
