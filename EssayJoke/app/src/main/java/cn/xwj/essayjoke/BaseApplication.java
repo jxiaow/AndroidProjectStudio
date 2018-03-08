@@ -24,13 +24,13 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         E.context(this);
-        sFixDexManager = new FixDexManager(this);
-        try {
-            sFixDexManager.loadFixDex();
-            Log.d(TAG, "sFixDexManager 加载完毕");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        sFixDexManager = new FixDexManager(this);
+//        try {
+//            sFixDexManager.loadFixDex();
+//            Log.d(TAG, "sFixDexManager 加载完毕");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
     }
 }

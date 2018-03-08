@@ -1,21 +1,13 @@
 package cn.xwj.essayjoke;
 
-import android.Manifest;
-import android.os.Environment;
-import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.File;
-
-import cn.xwj.easy.permission.EPermission;
-import cn.xwj.easy.util.LogUtil;
-import cn.xwj.easy.util.ToastUtil;
 import cn.xwj.frame.BaseSkinActivity;
 import cn.xwj.ioc.annotation.CheckNet;
 import cn.xwj.ioc.annotation.ContentView;
 import cn.xwj.ioc.annotation.OnClick;
 import cn.xwj.ioc.annotation.ViewById;
+import cn.xwj.widget.dialog.AlertDialog;
 
 @ContentView(R.layout.activity_main)
 public class MainActivity extends BaseSkinActivity {
@@ -26,25 +18,6 @@ public class MainActivity extends BaseSkinActivity {
 
     @Override
     protected void initData() {
-        EPermission.create(this).permission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .request(new EPermission.PermissionResult() {
-                    @Override
-                    public void onResult(boolean granted) {
-                        if (granted) {
-                            String filePath = Environment.getExternalStorageDirectory() + File.separator + "fix.dex";
-                            File file = new File(filePath);
-                            if (file.exists()) {
-                                try {
-                                    BaseApplication.sFixDexManager.addFixDex(filePath);
-                                    ToastUtil.showMsg("修复成功");
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                    ToastUtil.showMsg("修复失败");
-                                }
-                            }
-                        }
-                    }
-                });
     }
 
     @Override
@@ -63,6 +36,10 @@ public class MainActivity extends BaseSkinActivity {
     @CheckNet
     @OnClick(R.id.tv)
     private void click() {
-        Toast.makeText(this, 2 / 0 + "测试", Toast.LENGTH_SHORT).show();
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setContentView(R.layout.detail_comment_dialog)
+                .setText(R.id.submit_btn, "接收")
+                .fullWidth()
+                .show();
     }
 }
