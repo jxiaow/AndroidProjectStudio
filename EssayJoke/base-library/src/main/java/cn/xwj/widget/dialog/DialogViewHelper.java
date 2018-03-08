@@ -1,8 +1,6 @@
 package cn.xwj.widget.dialog;
 
 import android.content.Context;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
 import android.support.v4.util.SparseArrayCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,31 +10,26 @@ import java.lang.ref.WeakReference;
 
 /**
  * Author: xw
- * Date: 2018-03-08 10:45:55
+ * Date: 2018-03-08 12:19:22
  * Description: DialogViewHelper <this is description>.
  */
 
-class DialogViewHelper {
-
+public class DialogViewHelper {
     private View mContentView;
     private SparseArrayCompat<WeakReference<View>> mViews;
 
-    public DialogViewHelper(@NonNull Context context, @LayoutRes int layoutId) {
-        this();
-        mContentView = LayoutInflater.from(context).inflate(layoutId, null);
+    public DialogViewHelper() {
+        this.mViews = new SparseArrayCompat<>();
     }
 
-    public DialogViewHelper() {
-        mViews = new SparseArrayCompat<>();
+    public DialogViewHelper(Context context, int layoutId) {
+        this();
+        this.mContentView = LayoutInflater.from(context).inflate(layoutId, null);
     }
 
 
     public void setContentView(View contentView) {
-        mContentView = contentView;
-    }
-
-    public View getContentView() {
-        return mContentView;
+        this.mContentView = contentView;
     }
 
     public void setText(int viewId, CharSequence charSequence) {
@@ -46,14 +39,7 @@ class DialogViewHelper {
         }
     }
 
-    public void setOnClickListener(int viewId, View.OnClickListener listener) {
-        View view = getView(viewId);
-        if (view != null) {
-            view.setOnClickListener(listener);
-        }
-    }
-
-    public <T extends View> T getView(int viewId) {
+    public  <T extends View> T getView(int viewId) {
         WeakReference<View> viewWeakReference = mViews.get(viewId);
         View view = null;
         if (viewWeakReference != null) {
@@ -67,5 +53,16 @@ class DialogViewHelper {
             }
         }
         return (T) view;
+    }
+
+    public void setOnClickListener(int viewId, View.OnClickListener listener) {
+        View view = getView(viewId);
+        if (view != null) {
+            view.setOnClickListener(listener);
+        }
+    }
+
+    public View getContentView() {
+        return mContentView;
     }
 }

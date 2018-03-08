@@ -2,8 +2,8 @@ package cn.xwj.widget.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
-import android.support.v4.view.GravityCompat;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +12,13 @@ import cn.xwj.base.R;
 
 /**
  * Author: xw
- * Date: 2018-03-08 10:43:56
+ * Date: 2018-03-08 12:17:13
  * Description: AlertDialog <this is description>.
  */
 
 public class AlertDialog extends Dialog {
 
-    private AlertController mAlert;
+    private AlertController mAlertController;
 
     public AlertDialog(@NonNull Context context) {
         this(context, 0);
@@ -26,37 +26,22 @@ public class AlertDialog extends Dialog {
 
     public AlertDialog(@NonNull Context context, int themeResId) {
         super(context, themeResId);
-        mAlert = new AlertController(this, getWindow());
+        mAlertController = new AlertController(this, getWindow());
     }
 
-
-    /**
-     * 设置文本
-     *
-     * @param viewId
-     * @param text
-     */
-    public void setText(int viewId, CharSequence text) {
-        mAlert.setText(viewId,text);
+    public  <T extends View> T getView(int viewId) {
+        return mAlertController.getViewHelper().getView(viewId);
     }
 
-    public <T extends View> T getView(int viewId) {
-        return mAlert.getView(viewId);
+    public void setOnClickListener(int viewId, View.OnClickListener listener) {
+        mAlertController.getViewHelper().setOnClickListener(viewId, listener);
     }
 
-    /**
-     * 设置点击事件
-     *
-     * @param viewId
-     * @param listener
-     */
-    public void setOnclickListener(int viewId, View.OnClickListener listener) {
-        mAlert.setOnclickListener(viewId,listener);
+    public void setText(int viewId, CharSequence charSequence){
+        mAlertController.getViewHelper().setText(viewId,charSequence);
     }
-
 
     public static class Builder {
-
         private AlertController.AlertParams mParams;
 
 
@@ -67,6 +52,40 @@ public class AlertDialog extends Dialog {
 
         public Builder(Context context, int themeResId) {
             mParams = new AlertController.AlertParams(context, themeResId);
+        }
+
+        public Builder setContentView(@LayoutRes int layoutId) {
+            mParams.mView = null;
+            mParams.mLayoutId = layoutId;
+            return this;
+        }
+
+        public Builder setContentView(View view) {
+            mParams.mLayoutId = 0;
+            mParams.mView = view;
+            return this;
+        }
+
+        public Builder setCancelable(boolean cancelable) {
+            mParams.mCancelable = cancelable;
+            return this;
+        }
+
+        public Builder setOnCancelListener(OnCancelListener onCancelListener) {
+            mParams.mOnCancelListener = onCancelListener;
+            return this;
+        }
+
+
+        public Builder setOnDismissListener(OnDismissListener onDismissListener) {
+            mParams.mOnDismissListener = onDismissListener;
+            return this;
+        }
+
+
+        public Builder setOnKeyListener(OnKeyListener onKeyListener) {
+            mParams.mOnKeyListener = onKeyListener;
+            return this;
         }
 
         public Builder setText(int viewId, CharSequence charSequence) {
@@ -90,15 +109,15 @@ public class AlertDialog extends Dialog {
             return this;
         }
 
-        public Builder fromBottom(boolean isAnimation) {
-            if (isAnimation) {
+        public Builder fromBottom(boolean isAnimations) {
+            if (isAnimations) {
                 mParams.mAnimations = R.style.dialog_from_bottom_anim;
             }
             mParams.mGravity = Gravity.BOTTOM;
             return this;
         }
 
-        public Builder addDefaultAnimation() {
+        public Builder addDefaultAnimations() {
             mParams.mAnimations = R.style.dialog_scale_anim;
             return this;
         }
@@ -108,38 +127,11 @@ public class AlertDialog extends Dialog {
             return this;
         }
 
-        public Builder setContentView(int layoutId) {
-            mParams.mView = null;
-            mParams.mLayoutId = layoutId;
-            return this;
-        }
-
-        public Builder setContentView(View view) {
-            mParams.mLayoutId = 0;
-            mParams.mView = view;
-            return this;
-        }
-
-
-        public Builder setOnCancelListener(OnCancelListener onCancelListener) {
-            mParams.mOnCancelListener = onCancelListener;
-            return this;
-        }
-
-        public Builder setOnDismissListener(OnDismissListener onDismissListener) {
-            mParams.mOnDismissListener = onDismissListener;
-            return this;
-        }
-
-        public Builder setOnKeyListener(OnKeyListener onKeyListener) {
-            mParams.mOnKeyListener = onKeyListener;
-            return this;
-        }
 
         public AlertDialog create() {
             // Context has already been wrapped with the appropriate theme.
             final AlertDialog dialog = new AlertDialog(mParams.mContext, mParams.mThemeResId);
-            mParams.apply(dialog.mAlert);
+            mParams.apply(dialog.mAlertController);
             dialog.setCancelable(mParams.mCancelable);
             if (mParams.mCancelable) {
                 dialog.setCanceledOnTouchOutside(true);

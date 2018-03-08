@@ -9,13 +9,16 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
+import java.util.Dictionary;
+
 /**
  * Author: xw
- * Date: 2018-03-08 10:45:38
+ * Date: 2018-03-08 12:19:12
  * Description: AlertController <this is description>.
  */
 
-class AlertController {
+public class AlertController {
+
     private AlertDialog mDialog;
     private Window mWindow;
     private DialogViewHelper mViewHelper;
@@ -25,29 +28,19 @@ class AlertController {
         this.mWindow = window;
     }
 
-    public void setText(int viewId, CharSequence text) {
-        mViewHelper.setText(viewId, text);
+    public DialogViewHelper getViewHelper() {
+        return mViewHelper;
     }
-
-    public <T extends View> T getView(int viewId) {
-        return mViewHelper.getView(viewId);
-    }
-
-    public void setOnclickListener(int viewId, View.OnClickListener listener) {
-        mViewHelper.setOnClickListener(viewId, listener);
-    }
-
 
     public static class AlertParams {
-
         public Context mContext;
         public int mThemeResId;
+        public View mView;
+        public int mLayoutId;
         public boolean mCancelable = true;
         public DialogInterface.OnCancelListener mOnCancelListener;
         public DialogInterface.OnDismissListener mOnDismissListener;
         public DialogInterface.OnKeyListener mOnKeyListener;
-        public View mView;
-        public int mLayoutId = 0;
         public SparseArrayCompat<CharSequence> mTextArray = new SparseArrayCompat<>();
         public SparseArrayCompat<View.OnClickListener> mClickArray = new SparseArrayCompat<>();
         public int mWidth = ViewGroup.LayoutParams.WRAP_CONTENT;
@@ -60,43 +53,37 @@ class AlertController {
             this.mThemeResId = themeResId;
         }
 
-        public void apply(AlertController controller) {
-            DialogViewHelper viewHelper = null;
-            if (mView != null) {
-                viewHelper = new DialogViewHelper();
-                viewHelper.setContentView(mView);
-            }
-
+        public void apply(AlertController alertController) {
             if (mLayoutId != 0) {
-                viewHelper = new DialogViewHelper(mContext, mLayoutId);
+                alertController.mViewHelper = new DialogViewHelper(mContext, mLayoutId);
+            }
+            if (mView != null) {
+                alertController.mViewHelper = new DialogViewHelper();
+                alertController.mViewHelper.setContentView(mView);
+            }
+            if (alertController.mViewHelper == null) {
+                throw new IllegalArgumentException("请设置布局 setContentView()");
             }
 
-            if (viewHelper == null) {
-                throw new IllegalArgumentException("请设置布局文件 setContentView()");
-            }
-
-            controller.mDialog.setContentView(viewHelper.getContentView());
-            controller.mViewHelper = viewHelper;
+            alertController.mDialog.setContentView(alertController.mViewHelper.getContentView());
 
             for (int i = 0; i < mTextArray.size(); i++) {
-                viewHelper.setText(mTextArray.keyAt(i), mTextArray.valueAt(i));
+                alertController.mViewHelper.setText(mTextArray.keyAt(i), mTextArray.valueAt(i));
             }
 
             for (int i = 0; i < mClickArray.size(); i++) {
-                viewHelper.setOnClickListener(mClickArray.keyAt(i), mClickArray.valueAt(i));
+                alertController.mViewHelper.setOnClickListener(mClickArray.keyAt(i), mClickArray.valueAt(i));
             }
 
-            controller.mWindow.setGravity(mGravity);
+            alertController.mWindow.setGravity(mGravity);
             if (mAnimations != 0) {
-                controller.mWindow.setWindowAnimations(mAnimations);
+                alertController.mWindow.setWindowAnimations(mAnimations);
             }
 
-            WindowManager.LayoutParams attributes = controller.mWindow.getAttributes();
+            WindowManager.LayoutParams attributes = alertController.mWindow.getAttributes();
             attributes.width = mWidth;
             attributes.height = mHeight;
-            controller.mWindow.setAttributes(attributes);
+            alertController.mWindow.setAttributes(attributes);
         }
     }
-
-
 }
