@@ -7,6 +7,7 @@ import cn.xwj.ioc.annotation.CheckNet;
 import cn.xwj.ioc.annotation.ContentView;
 import cn.xwj.ioc.annotation.OnClick;
 import cn.xwj.ioc.annotation.ViewById;
+import cn.xwj.widget.dialog.AlertDialog;
 
 @ContentView(R.layout.activity_main)
 public class MainActivity extends BaseSkinActivity {
