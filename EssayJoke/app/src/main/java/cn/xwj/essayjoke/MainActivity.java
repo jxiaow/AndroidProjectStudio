@@ -3,6 +3,7 @@ package cn.xwj.essayjoke;
 import android.widget.TextView;
 
 import cn.xwj.frame.BaseSkinActivity;
+import cn.xwj.frame.DefaultNavigationBar;
 import cn.xwj.ioc.annotation.CheckNet;
 import cn.xwj.ioc.annotation.ContentView;
 import cn.xwj.ioc.annotation.OnClick;
@@ -27,6 +28,11 @@ public class MainActivity extends BaseSkinActivity {
 
     @Override
     protected void initTitle() {
+
+        DefaultNavigationBar navigationBar = new DefaultNavigationBar.Builder(this)
+                .setTitle("投稿")
+                .setRightText("发表")
+                .build();
     }
 
     @Override
