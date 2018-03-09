@@ -7,29 +7,8 @@
     android:orientation="vertical"
     tools:context="cn.xwj.customviewproject.MainActivity">
 
-    <cn.xwj.customviewproject.widget.Bezier2
+    <cn.xwj.customviewproject.widget.Bezier3
         android:id="@+id/bezier"
         android:layout_width="match_parent"
-        android:layout_height="300dp" />
-
-    <RadioGroup
-        android:id="@+id/radio_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:id="@+id/radio_btn1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="模式1" />
-
-        <RadioButton
-            android:id="@+id/radio_btn2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="模式2" />
-    </RadioGroup>
+        android:layout_height="match_parent" />
 </LinearLayout>

@@ -4,6 +4,8 @@ import android.widget.TextView;
 
 import cn.xwj.frame.BaseSkinActivity;
 import cn.xwj.frame.DefaultNavigationBar;
+import cn.xwj.http.HttpCallBack;
+import cn.xwj.http.HttpUtils;
 import cn.xwj.ioc.annotation.CheckNet;
 import cn.xwj.ioc.annotation.ContentView;
 import cn.xwj.ioc.annotation.OnClick;
@@ -19,6 +21,17 @@ public class MainActivity extends BaseSkinActivity {
 
     @Override
     protected void initData() {
+        HttpUtils.with(this).url("").addParam("", "").get().execute(new HttpCallBack() {
+            @Override
+            public void onError(Exception e) {
+
+            }
+
+            @Override
+            public void onSuccess(String result) {
+
+            }
+        });
     }
 
     @Override
