@@ -5,23 +5,23 @@ import android.support.v4.util.ArrayMap;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.Map;
 
 /**
- * Author: xw
- * Date: 2018-03-09 14:03:31
- * Description: HttpUtils <this is description>.
+ * Created by xw on 2018/3/10.
  */
 
 public class HttpUtils {
-    private static final int GET = 0x0001;
-    private static final int POST = 0x0002;
+    private static final int TYPE_GET = 0x00011;
+    private static final int TYPE_POST = 0x00012;
 
-    private static IHttpEngine sHttpEngine = new OkHttpEngine();
-    private String url;
+    //默认网络引擎
+    private static IHttpEngine sIHttpEngine = new OkHttpEngine();
+
     private Context mContext;
+    private String url;
+    private int methodType = TYPE_GET;
     private ArrayMap<String, Object> mParams;
-    private int type = GET;
+
 
     private HttpUtils(Context context) {
         this.mContext = context;
@@ -29,20 +29,26 @@ public class HttpUtils {
     }
 
     public static void init(IHttpEngine engine) {
-        sHttpEngine = engine;
+        sIHttpEngine = engine;
     }
+
 
     public static HttpUtils with(Context context) {
         return new HttpUtils(context);
     }
 
-    public HttpUtils exchangeEngine(IHttpEngine engine) {
-        sHttpEngine = engine;
+    public HttpUtils url(String url) {
+        this.url = url;
         return this;
     }
 
-    public HttpUtils url(String url) {
-        this.url = url;
+    public HttpUtils get() {
+        this.methodType = TYPE_GET;
+        return this;
+    }
+
+    public HttpUtils post() {
+        this.methodType = TYPE_POST;
         return this;
     }
 
@@ -51,71 +57,54 @@ public class HttpUtils {
         return this;
     }
 
-    public HttpUtils addParams(Map<String, Object> params) {
-        mParams.putAll(params);
+    public HttpUtils exchangeEngine(IHttpEngine engine) {
+        sIHttpEngine = engine;
         return this;
-    }
-
-    public HttpUtils get() {
-        this.type = GET;
-        return this;
-    }
-
-    public HttpUtils post() {
-        this.type = POST;
-        return this;
-    }
-
-    public void execute(HttpCallBack callBack) {
-        if (callBack == null) {
-            callBack = HttpCallBack.DEFAULT_CALLBACK;
-        }
-        if (this.type == GET) {
-            get(url, mParams, callBack);
-        }
-
-        if (this.type == POST) {
-            post(url, mParams, callBack);
-        }
     }
 
     public void execute() {
         execute(null);
     }
 
+    public void execute(IEngineCallBack callBack) {
+        if (url == null) {
+            throw new IllegalArgumentException("url is null");
+        }
 
-    private void get(String url, ArrayMap<String, Object> params, HttpCallBack callBack) {
-        sHttpEngine.get(mContext, url, params, callBack);
+        if (callBack == null) {
+            callBack = IEngineCallBack.DEFAULT_CALL_BACK;
+        }
+
+        callBack.preExecute(mContext, mParams);
+
+        if (methodType == TYPE_GET) {
+            sIHttpEngine.get(mContext, url, mParams, callBack);
+        }
+
+        if (methodType == TYPE_POST) {
+            sIHttpEngine.post(mContext, url, mParams, callBack);
+        }
     }
 
-    private void post(String url, ArrayMap<String, Object> params, HttpCallBack callBack) {
-        sHttpEngine.get(mContext, url, params, callBack);
-    }
-
-    public static String joinParams(String url, ArrayMap<String, Object> params) {
+    public static String generateUrl(String url, ArrayMap<String, Object> params) {
         if (params == null || params.isEmpty()) {
             return url;
         }
 
         StringBuffer stringBuffer = new StringBuffer(url);
-        if (!url.contains("?")) {
-            stringBuffer.append("?");
-        } else {
-            if (!url.endsWith("?")) {
-                stringBuffer.append("&");
-            }
+        stringBuffer.append(!url.contains("?") ? "?" : !url.endsWith("?") ? "&" : "");
+
+        for (String key : params.keySet()) {
+            stringBuffer.append(key).append("=").append(params.get(key)).append("&");
         }
 
-        for (Map.Entry<String, Object> entry : params.entrySet()) {
-            stringBuffer.append(entry.getKey() + "=" + entry.getValue() + "&");
-        }
         stringBuffer.deleteCharAt(stringBuffer.length() - 1);
         return stringBuffer.toString();
     }
 
-    public static Class<?> analysisClassInfo(Object object) {
-        Type type = object.getClass().getGenericSuperclass();
-        Type[] types = ((ParameterizedType) type).getActualTypeArguments();
-        return (Class<?>) types[0];
+    public static <T> Type analysisClassType(T t) {
+        Type type = t.getClass().getGenericSuperclass();
+        Type[] typeArguments = ((ParameterizedType) type).getActualTypeArguments();
+        return typeArguments[0];
     }
 }
