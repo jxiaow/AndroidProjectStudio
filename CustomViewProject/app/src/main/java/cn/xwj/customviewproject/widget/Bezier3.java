@@ -32,6 +32,7 @@ public class Bezier3 extends View {
     private float mCount = 100;                         // 将时长总共划分多少份
     private float mPiece = mDuration / mCount;            // 每一份的时长
 
+
     public Bezier3(Context context) {
         this(context, null);
     }
@@ -113,32 +114,32 @@ public class Bezier3 extends View {
         drawAuxiliaryLine(canvas);
 
 
-        // 绘制贝塞尔曲线
-        mPaint.setColor(Color.RED);
-        mPaint.setStrokeWidth(8);
-
-        Path path = new Path();
-        path.moveTo(mDatas[0], mDatas[1]);
-
-        path.cubicTo(mCtrl[0], mCtrl[1], mCtrl[2], mCtrl[3], mDatas[2], mDatas[3]);
-        path.cubicTo(mCtrl[4], mCtrl[5], mCtrl[6], mCtrl[7], mDatas[4], mDatas[5]);
-        path.cubicTo(mCtrl[8], mCtrl[9], mCtrl[10], mCtrl[11], mDatas[6], mDatas[7]);
-        path.cubicTo(mCtrl[12], mCtrl[13], mCtrl[14], mCtrl[15], mDatas[0], mDatas[1]);
-
-        canvas.drawPath(path, mPaint);
-
-        mCurrent += mPiece;
-        if (mCurrent < mDuration) {
-
-            mDatas[1] -= 120 / mCount;
-            mCtrl[7] += 80 / mCount;
-            mCtrl[9] += 80 / mCount;
-
-            mCtrl[4] -= 20 / mCount;
-            mCtrl[10] += 20 / mCount;
-
-            postInvalidateDelayed((long) mPiece);
-        }
+//        // 绘制贝塞尔曲线
+//        mPaint.setColor(Color.RED);
+//        mPaint.setStrokeWidth(8);
+//
+//        Path path = new Path();
+//        path.moveTo(mDatas[0], mDatas[1]);
+//
+//        path.cubicTo(mCtrl[0], mCtrl[1], mCtrl[2], mCtrl[3], mDatas[2], mDatas[3]);
+//        path.cubicTo(mCtrl[4], mCtrl[5], mCtrl[6], mCtrl[7], mDatas[4], mDatas[5]);
+//        path.cubicTo(mCtrl[8], mCtrl[9], mCtrl[10], mCtrl[11], mDatas[6], mDatas[7]);
+//        path.cubicTo(mCtrl[12], mCtrl[13], mCtrl[14], mCtrl[15], mDatas[0], mDatas[1]);
+//
+//        canvas.drawPath(path, mPaint);
+//
+//        mCurrent += mPiece;
+//        if (mCurrent < mDuration) {
+//
+//            mDatas[1] -= 120 / mCount;
+//            mCtrl[7] += 80 / mCount;
+//            mCtrl[9] += 80 / mCount;
+//
+//            mCtrl[4] -= 20 / mCount;
+//            mCtrl[10] += 20 / mCount;
+//
+//            postInvalidateDelayed((long) mPiece);
+//        }
     }
 
     // 绘制辅助线
@@ -147,31 +148,39 @@ public class Bezier3 extends View {
         mPaint.setColor(Color.GRAY);
         mPaint.setStrokeWidth(20);
 
-        for (int i = 0; i < 8; i += 2) {
+        for (int i = 0; i < mDatas.length; i += 2) {
             canvas.drawPoint(mDatas[i], mDatas[i + 1], mPaint);
         }
 
-        for (int i = 0; i < 16; i += 2) {
+        for (int i = 0; i < mCtrl.length; i += 2) {
             canvas.drawPoint(mCtrl[i], mCtrl[i + 1], mPaint);
         }
 
-
         // 绘制辅助线
         mPaint.setStrokeWidth(4);
+        canvas.drawLine(mDatas[2], mDatas[2 + 1], mCtrl[2], mCtrl[2 + 1], mPaint);
+        canvas.drawLine(mDatas[2], mDatas[2+1], mCtrl[4], mCtrl[5], mPaint);
+//        for (int i = 0, j = 0; i < 8; i += 2, j += 2) {
+//            canvas.drawLine(mDatas[i], mDatas[i + 1], mCtrl[j], mCtrl[j + 1], mPaint);
+////            canvas.drawLine(mDatas[i], mDatas[i + 1], mCtrl[j], mCtrl[j + 1], mPaint);
+//        }
 
-        for (int i = 2, j = 2; i < 8; i += 2, j += 4) {
-            canvas.drawLine(mDatas[i], mDatas[i + 1], mCtrl[j], mCtrl[j + 1], mPaint);
-            canvas.drawLine(mDatas[i], mDatas[i + 1], mCtrl[j + 2], mCtrl[j + 3], mPaint);
-        }
-        canvas.drawLine(mDatas[0], mDatas[1], mCtrl[0], mCtrl[1], mPaint);
-        canvas.drawLine(mDatas[0], mDatas[1], mCtrl[14], mCtrl[15], mPaint);
     }
 
     // 绘制坐标系
     private void drawCoordinateSystem(Canvas canvas) {
         canvas.save();
 
+        canvas.translate(mCenterX, mCenterY);
+        canvas.scale(1, -1);
 
+        Paint paint = new Paint();
+        paint.setColor(Color.RED);
+        paint.setStrokeWidth(8);
+        paint.setStyle(Paint.Style.STROKE);
+
+        canvas.drawLine(-mCenterX * 0.9f, 0, mCenterX * 0.9f, 0, paint);
+        canvas.drawLine(0, -mCenterY * 0.9f, 0, mCenterY * 0.9f, paint);
         canvas.restore();
     }
 }
