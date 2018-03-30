@@ -2,6 +2,7 @@ package cn.xwj.preferencelibrary;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.annotation.Nullable;
 import android.support.v4.util.ArrayMap;
 
 import java.lang.reflect.Field;
@@ -37,12 +38,42 @@ public class PreferenceManager {
      * @param <T>   返回数据的类型
      * @return 返回数据
      */
+    @Nullable
     public <T> T get(Class<T> clazz) {
         if (clazz == null) {
             return null;
         }
         Field[] declaredFields = clazz.getDeclaredFields();
+        if (declaredFields == null || declaredFields.length <= 0) {
+            return null;
+        }
+        try {
+            T newInstance = clazz.newInstance();
+            for (Field declaredField : declaredFields) {
+                String name = declaredField.getName();
+                Object object = get(name, declaredField.getType());
+                declaredField.setAccessible(true);
+                declaredField.set(newInstance, object);
+            }
+            return newInstance;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
+    /**
+     * 反射get方法
+     */
+    private Object get(String name, Class<?> type) throws Exception {
+        String typeName = validateType(type);
+        String methodName = "get" + typeName;
+        Method method = mMethodMap.get(methodName);
+        if (method == null) {
+            method = SharedPreferences.class.getMethod(methodName, getParamsType(typeName));
+            mMethodMap.put(methodName, method);
+        }
+        return method.invoke(mSharedPreferences, name, type.isPrimitive() ? -1 : null);
     }
 
     /**
@@ -73,6 +104,7 @@ public class PreferenceManager {
                 e.printStackTrace();
             }
         }
+        mEditor.apply();
     }
 
     /**
