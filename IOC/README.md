@@ -21,8 +21,6 @@
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Injector.inject(this);
-
-        mTextView.setText("加载fragment");
     }
 
 #### ContentView()
@@ -39,9 +37,6 @@
 
     @OnClick(R.id.tv)
     private void replace(View view) {
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.container, new BlankFragment())
-                .commit();
     }
 
 ### Fragment中使用：
