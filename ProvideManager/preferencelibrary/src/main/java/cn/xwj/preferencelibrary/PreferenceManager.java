@@ -12,7 +12,7 @@ import java.util.Locale;
 /**
  * Author: xw
  * Date: 2018-03-30 17:20:25
- * Description: PreferenceManager: .
+ * Description: PreferenceManager: SharedPreference的管理类.
  */
 
 public class PreferenceManager {
@@ -22,13 +22,20 @@ public class PreferenceManager {
     private Context mContext;
     private ArrayMap<String, Method> mMethodMap = new ArrayMap<>();
 
+    /**
+     * 首次调用需要初始化
+     */
     public void init(Context context, String fileName) {
         mContext = context.getApplicationContext();
-        mSharedPreferences = mContext.getSharedPreferences(fileName, Context.MODE_PRIVATE);
+        exchangeFile(fileName);
     }
 
-    public void exchangeFile(String name) {
+    /**
+     * 改变配置的文件名
+     */
+    public PreferenceManager exchangeFile(String name) {
         mSharedPreferences = mContext.getSharedPreferences(name, Context.MODE_PRIVATE);
+        return this;
     }
 
     /**
@@ -51,6 +58,7 @@ public class PreferenceManager {
             T newInstance = clazz.newInstance();
             for (Field declaredField : declaredFields) {
                 String name = declaredField.getName();
+                //通过反射调用
                 Object object = get(name, declaredField.getType());
                 declaredField.setAccessible(true);
                 declaredField.set(newInstance, object);
