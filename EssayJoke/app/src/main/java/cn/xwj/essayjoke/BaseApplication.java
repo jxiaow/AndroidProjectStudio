@@ -7,6 +7,7 @@ import com.alipay.euler.andfix.patch.PatchManager;
 
 import cn.xwj.crash.CrashExceptionHandler;
 import cn.xwj.fixbug.FixDexManager;
+import cn.xwj.frame.skin.SkinManager;
 import cn.xwj.util.Utils;
 import cn.xwj.easy.E;
 
@@ -24,6 +25,7 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         E.context(this);
+        SkinManager.getInstance().init(this);
 //        sFixDexManager = new FixDexManager(this);
 //        try {
 //            sFixDexManager.loadFixDex();

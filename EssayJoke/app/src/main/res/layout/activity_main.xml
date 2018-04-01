@@ -4,16 +4,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/color_5c6266"
     tools:context="cn.xwj.essayjoke.MainActivity">
 
     <Button
-        android:id="@+id/tv"
+        android:id="@+id/switch_skin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="测试" />
+        android:textColor="@color/s5_night"
+        android:text="换肤" />
+
+    <Button
+        android:id="@+id/restore_skin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/s5_night"
+        android:text="恢复默认" />
+
+    <Button
+        android:id="@+id/skip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/s5_night"
+        android:text="跳转"/>
 
     <ImageView
-        android:id="@+id/iv_icon"
+        android:id="@+id/iv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="center"

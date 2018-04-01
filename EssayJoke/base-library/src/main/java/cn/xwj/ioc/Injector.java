@@ -93,7 +93,7 @@ public class Injector {
                 int value = field.getAnnotation(ViewById.class).value();
                 View view = viewFinder.findViewById(value);
                 if (view == null) {
-                    throw new IllegalArgumentException("can not find " + value + "with " + field.getName());
+                    throw new IllegalArgumentException("can not find " + value + " with " + field.getName());
                 }
                 field.setAccessible(true);
                 try {
@@ -120,7 +120,7 @@ public class Injector {
                 for (int id : value) {
                     View view = viewFinder.findViewById(id);
                     if (view == null) {
-                        throw new IllegalArgumentException("can not find " + id + "with " + method.getName());
+                        throw new IllegalArgumentException("can not find " + id + " with " + method.getName());
                     }
                     view.setOnClickListener(new ProxyOnClickListener(method, object));
                 }
