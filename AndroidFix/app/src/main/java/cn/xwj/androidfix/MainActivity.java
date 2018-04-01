@@ -15,22 +15,28 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        startActivity();
         loadPath();
     }
 
     private void loadPath() {
         String patchPath = Environment.getExternalStorageDirectory()
                 + File.separator + "fix.apatch";
-        try {
-            BaseApplication.sPatchManager.addPatch(patchPath);
-            Toast.makeText(this, "修复成功", Toast.LENGTH_SHORT).show();
-        } catch (IOException e) {
-            e.printStackTrace();
+        File file = new File(patchPath);
+        if (file.exists()) {
+            try {
+                BaseApplication.sPatchManager.addPatch(patchPath);
+                Toast.makeText(this, "修复成功", Toast.LENGTH_SHORT).show();
+            } catch (IOException e) {
+                e.printStackTrace();
+                Toast.makeText(this, "修复成功", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
     public void test(View view) {
-        Toast.makeText(this, "test", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "test: " + 1 / 2, Toast.LENGTH_LONG).show();
     }
 
 }
