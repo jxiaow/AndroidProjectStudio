@@ -9,6 +9,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import dalvik.system.BaseDexClassLoader;
 
@@ -21,15 +24,21 @@ import dalvik.system.BaseDexClassLoader;
 public class DexFixManager {
     private static final String TAG = "DexFixManager";
     private static final String ROOT_NAME = "odex";
-    private File mDexRootDir;
-    private Context mContext;
+    private File mDexRootDir; //dex存储路径
     private ClassLoader mAppClassLoader; //app的classLoader
+    private Field mPathListField; // pathList的字段
+    private Object mPathList; // pathList的字段值
+    private Field mDexElementsField; //dexElements字段
+    private File mOptimizedDirectory;//dex解压的路径
+
 
     public void init(Context context) {
-        mContext = context;
-        mDexRootDir = mContext.getDir(ROOT_NAME, Context.MODE_PRIVATE);
-        mAppClassLoader = mContext.getClassLoader();
-
+        mDexRootDir = context.getDir(ROOT_NAME, Context.MODE_PRIVATE);
+        mAppClassLoader = context.getClassLoader();
+        mOptimizedDirectory = new File(mDexRootDir + File.separator + "dex");
+        if (!mOptimizedDirectory.exists()) {
+            mOptimizedDirectory.mkdirs();
+        }
     }
 
     public void loadFixDex() {
@@ -41,9 +50,11 @@ public class DexFixManager {
         if (files == null || files.length <= 0) {
             return;
         }
-
-        for (File file : files) {
-
+        List<File> fileList = Arrays.asList(files);
+        try {
+            addDexElements(fileList);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -66,34 +77,45 @@ public class DexFixManager {
         }
         //将文件拷贝到指定的目录
         FileUtils.copyFile(src, dest);
-        //通过反射获取appClassLoader中的dexPathList, dexElement
-        ClassLoader appClassLoader = mContext.getClassLoader();
-        Field pathListField = BaseDexClassLoader.class.getDeclaredField("pathList");
-        pathListField.setAccessible(true);
-        Object pathList = pathListField.get(appClassLoader);
-        Field dexElementsField = pathList.getClass().getDeclaredField("dexElements");
-        dexElementsField.setAccessible(true);
-        Object dexElements = dexElementsField.get(pathList);
-
-        //创建ClassLoader
-        File optimizedDirectory = new File(mDexRootDir + File.separator + "dex");
-        if (!optimizedDirectory.exists()) {
-            optimizedDirectory.mkdirs();
-        }
-        BaseDexClassLoader classLoader = new BaseDexClassLoader(
-                dest.getAbsolutePath(),
-                optimizedDirectory,
-                null,
-                appClassLoader
-        );
-        //通过classLoader获取fixDex中的dexElements
-        Object fixDexPathList = pathListField.get(classLoader);
-        Object fixDexElements = dexElementsField.get(fixDexPathList);
-        //和并dexElements
-        Object object = combineDexElements(dexElements, fixDexElements);
-        //将合并的重新设置给appClassLoader所在的dexElements中
-        dexElementsField.set(pathList, object);
+        List<File> fileList = new ArrayList<>();
+        fileList.add(dest);
+        addDexElements(fileList);
         Log.d(TAG, "完成");
+    }
+
+    private void addDexElements(List<File> fileList) throws Exception {
+        if (fileList == null) {
+            return;
+        }
+        //通过反射获取appClassLoader中的dexPathList, dexElement
+        if (mPathListField == null) {
+            mPathListField = BaseDexClassLoader.class.getDeclaredField("pathList");
+            mPathListField.setAccessible(true);
+            mPathList = mPathListField.get(mAppClassLoader);
+        }
+
+        if (mDexElementsField == null) {
+            mDexElementsField = mPathList.getClass().getDeclaredField("dexElements");
+            mDexElementsField.setAccessible(true);
+        }
+
+        Object dexElements = mDexElementsField.get(mPathList);
+        for (File file : fileList) {
+            //创建ClassLoader
+            BaseDexClassLoader classLoader = new BaseDexClassLoader(
+                    file.getAbsolutePath(),
+                    mOptimizedDirectory,
+                    null,
+                    mAppClassLoader
+            );
+            //通过classLoader获取fixDex中的dexElements
+            Object fixDexPathList = mPathListField.get(classLoader);
+            Object fixDexElements = mDexElementsField.get(fixDexPathList);
+            //和并dexElements
+            Object object = combineDexElements(dexElements, fixDexElements);
+            //将合并的重新设置给appClassLoader所在的dexElements中
+            mDexElementsField.set(mPathList, object);
+        }
     }
 
     private Object combineDexElements(Object dexElements, Object fixDexElements) {
