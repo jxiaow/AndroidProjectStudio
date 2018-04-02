@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AndroidFix.iml" filepath="$PROJECT_DIR$/AndroidFix.iml" />
+      <module fileurl="file://F:\AndroidProjectStudio\AndroidFix\AndroidFix.iml" filepath="F:\AndroidProjectStudio\AndroidFix\AndroidFix.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://F:\AndroidProjectStudio\AndroidFix\app\app.iml" filepath="F:\AndroidProjectStudio\AndroidFix\app\app.iml" />
     </modules>
   </component>
 </project>

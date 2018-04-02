@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.alipay.euler.andfix.patch.PatchManager;
 
+import cn.xwj.androidfix.fix.DexFixManager;
 import cn.xwj.androidfix.util.AppUtils;
 
 /**
@@ -14,13 +15,16 @@ import cn.xwj.androidfix.util.AppUtils;
  */
 
 public class BaseApplication extends Application {
-    public static PatchManager sPatchManager;
+    //    public static PatchManager sPatchManager;
+    public static DexFixManager sDexFixManager;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        sPatchManager = new PatchManager(this);
-        sPatchManager.init(AppUtils.getVersion(this));
-        sPatchManager.loadPatch();
+        sDexFixManager = new DexFixManager();
+        sDexFixManager.init(this);
+//        sPatchManager = new PatchManager(this);
+//        sPatchManager.init(AppUtils.getVersion(this));
+//        sPatchManager.loadPatch();
     }
 }

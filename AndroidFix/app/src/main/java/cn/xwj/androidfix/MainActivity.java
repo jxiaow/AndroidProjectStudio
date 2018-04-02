@@ -1,13 +1,13 @@
 package cn.xwj.androidfix;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
 import java.io.File;
-import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,28 +15,43 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        startActivity();
-        loadPath();
+        loadFixDex();
+//        loadPath();
     }
 
-    private void loadPath() {
-        String patchPath = Environment.getExternalStorageDirectory()
-                + File.separator + "fix.apatch";
-        File file = new File(patchPath);
+    private void loadFixDex() {
+        String dexPath = Environment.getExternalStorageDirectory()
+                + File.separator + "fix.dex";
+        File file = new File(dexPath);
         if (file.exists()) {
             try {
-                BaseApplication.sPatchManager.addPatch(patchPath);
+                BaseApplication.sDexFixManager.addFixDex(file.getAbsolutePath());
                 Toast.makeText(this, "修复成功", Toast.LENGTH_SHORT).show();
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
-                Toast.makeText(this, "修复成功", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "修复失败", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
+    private void loadPath() {
+//        String patchPath = Environment.getExternalStorageDirectory()
+//                + File.separator + "fix.apatch";
+//        File file = new File(patchPath);
+//        if (file.exists()) {
+//            try {
+//                BaseApplication.sPatchManager.addPatch(patchPath);
+//                Toast.makeText(this, "修复成功", Toast.LENGTH_SHORT).show();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//                Toast.makeText(this, "修复成功", Toast.LENGTH_SHORT).show();
+//            }
+//        }
+    }
+
     public void test(View view) {
-        Toast.makeText(this, "test: " + 1 / 2, Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, TestActivity.class);
+        startActivity(intent);
     }
 
 }
