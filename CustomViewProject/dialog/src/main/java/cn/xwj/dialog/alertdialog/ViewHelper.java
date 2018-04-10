@@ -10,5 +10,5 @@ import android.support.v7.app.*;
  */
 
 public class ViewHelper {
-    android.support.v7.app.AlertDialog
+
 }
