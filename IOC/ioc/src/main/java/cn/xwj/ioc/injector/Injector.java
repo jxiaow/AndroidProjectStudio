@@ -79,7 +79,7 @@ public class Injector {
         if (view == null) {
             throw new IllegalArgumentException("not find " + value + " with " + object.getClass());
         }
-        inject(new ViewFinder(view), object);
+        inject(object, view);
         return view;
     }
 

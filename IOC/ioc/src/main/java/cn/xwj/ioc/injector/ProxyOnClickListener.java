@@ -2,6 +2,7 @@ package cn.xwj.ioc.injector;
 
 import android.view.View;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
@@ -23,15 +24,20 @@ public class ProxyOnClickListener implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         mMethod.setAccessible(true);
+        Class<?>[] parameterTypes = mMethod.getParameterTypes();
+        if (parameterTypes == null || parameterTypes.length <= 0) {
+            try {
+                mMethod.invoke(mObject);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            }
+            return;
+        }
         try {
             mMethod.invoke(mObject, v);
         } catch (Exception e) {
-            try {
-                mMethod.invoke(mObject);
-            } catch (Exception e1) {
-                e1.printStackTrace();
-                throw new RuntimeException("not find " + mMethod.getName());
-            }
             e.printStackTrace();
         }
     }
