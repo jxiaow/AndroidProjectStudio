@@ -1,7 +1,5 @@
 package cn.xwj.httptest.http;
 
-import java.util.Map;
-
 /**
  * Author: xw
  * Email:i.xiaowujiang@gmail.com

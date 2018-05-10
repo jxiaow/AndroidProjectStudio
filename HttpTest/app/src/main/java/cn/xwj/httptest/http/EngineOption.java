@@ -11,7 +11,7 @@ import java.util.Map;
  * Date: 2018-05-09 2018/5/9
  * Description: EngineOption
  */
-class EngineOption {
+public class EngineOption {
 
     /**
      * GET 请求

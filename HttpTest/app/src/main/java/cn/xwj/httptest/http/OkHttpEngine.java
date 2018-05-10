@@ -1,12 +1,20 @@
 package cn.xwj.httptest.http;
 
+import android.text.TextUtils;
+
+import java.io.File;
 import java.io.IOException;
+import java.net.FileNameMap;
+import java.net.URLConnection;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -127,15 +135,15 @@ public class OkHttpEngine implements IHttpEngine {
     }
 
     @Override
-    public void post(EngineOption option, IEngineCallback callback) {
+    public void post(final EngineOption option, final IEngineCallback callback) {
 
         //拼接url
         String url = option.getUrl();
         //获取Content-Type 的值
         String contentType = option.getHeaders().get("Content-Type");
-        Request.Builder builder = getRequestBuilder(contentType, option.getParams());
+        RequestBody requestBody = getRequestBody(contentType, option.getParams());
         //设置url
-        builder.url(url);
+        Request.Builder builder = new Request.Builder().url(url).post(requestBody);
         //设置header
         if (!option.getHeaders().isEmpty()) {
             for (Map.Entry<String, String> entry : option.getHeaders().entrySet()) {
@@ -160,14 +168,79 @@ public class OkHttpEngine implements IHttpEngine {
 
                     @Override
                     public void onResponse(Call call, Response response) {
+                        if(call.isCanceled()){
+                            return;
+                        }
                         handleSuccess(response, option, callback);
                     }
                 });
 
     }
 
-    private Request.Builder getRequestBuilder(String contentType, Map<String, Object> params) {
-        return null;
+    private RequestBody getRequestBody(String contentType, Map<String, Object> params) {
+        //body 是json 格式
+        if (FormData.JSON_DATA.getValue().equals(contentType)) {
+            Object json = params.get("json");
+            if (json == null) {
+                throw new IllegalArgumentException("请将json 加入到key 为 json的params中");
+            }
+            return RequestBody.create(MediaType.parse(contentType),
+                    String.valueOf(json));
+        }
+        // body是复杂的类型，如文件
+        if (FormData.MULTI_PART_DATA.getValue().equals(contentType)) {
+            MultipartBody.Builder builder = new MultipartBody.Builder()
+                    .setType(MultipartBody.FORM);
+            addParams(builder, params);
+            return builder.build();
+        }
+        // body 为form形式
+        FormBody.Builder builder = new FormBody.Builder();
+        for (Map.Entry<String, Object> entry : params.entrySet()) {
+            builder.add(entry.getKey(), String.valueOf(entry.getValue()));
+        }
+        return builder.build();
+    }
+
+    /**
+     * 拼接参数
+     *
+     * @param builder 复杂的builder
+     * @param params  请求参数
+     */
+    private void addParams(MultipartBody.Builder builder, Map<String, Object> params) {
+
+        for (Map.Entry<String, Object> entry : params.entrySet()) {
+            String key = entry.getKey();
+            Object value = entry.getValue();
+
+            if (value instanceof File) {
+
+                File file = (File) value;
+                builder.addFormDataPart(key, file.getName(), MultipartBody.create(
+                        MediaType.parse(guessType(file.getAbsolutePath())), file));
+            } else if (value instanceof List) {
+                List<File> fileList = (List<File>) value;
+                for (int i = 0; i < fileList.size(); i++) {
+                    File file = fileList.get(i);
+                    builder.addFormDataPart(key + i, file.getName(),
+                            MultipartBody.create(MediaType.parse(guessType(file.getAbsolutePath())), file));
+                }
+            } else {
+                builder.addFormDataPart(key, String.valueOf(value));
+            }
+        }
+
+
+    }
+
+    private String guessType(String filePath) {
+        FileNameMap fileNameMap = URLConnection.getFileNameMap();
+        String contentTypeFor = fileNameMap.getContentTypeFor(filePath);
+        if (TextUtils.isEmpty(contentTypeFor)) {
+            contentTypeFor = "application/octet-stream";
+        }
+        return contentTypeFor;
     }
 
     @Override
