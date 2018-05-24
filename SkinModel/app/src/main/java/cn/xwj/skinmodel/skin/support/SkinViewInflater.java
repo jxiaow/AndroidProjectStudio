@@ -80,12 +80,10 @@ public class SkinViewInflater extends AppCompatViewInflater {
         try {
             Method createViewFromTagMethod = mMethodArrayMap.get("createViewFromTag");
             if (createViewFromTagMethod == null) {
-
-                createViewFromTagMethod = AppCompatViewInflater.class.getDeclaredMethod("createViewFromTag",
-                        Context.class, String.class, AttributeSet.class);
+                createViewFromTagMethod = AppCompatViewInflater.class.getDeclaredMethod(
+                        "createViewFromTag",Context.class, String.class, AttributeSet.class);
                 createViewFromTagMethod.setAccessible(true);
                 mMethodArrayMap.put("createViewFromTag", createViewFromTagMethod);
-
             }
             return (View) createViewFromTagMethod.invoke(this, context, name, attrs);
         } catch (Exception e) {
