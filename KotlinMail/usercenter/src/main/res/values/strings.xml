@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">UserCenter</string>
+    <string name="hint_input_phone_number">请输入手机号</string>
+    <string name="hint_input_verify_code">请输入验证码</string>
+    <string name="hint_input_pwd">请输入密码</string>
+    <string name="hint_input_confirm_pwd">请输入确认密码</string>
+    <string name="btn_register">注册</string>
+</resources>
