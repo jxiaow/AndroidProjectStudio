@@ -38,8 +38,13 @@ dependencies {
     implementation "com.google.dagger:dagger:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
 
+    // retorfit
     api "com.squareup.retrofit2:retrofit:$retrofit_version"
     api "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
     api "com.squareup.retrofit2:converter-gson:$retrofit_version"
     api "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+
+    // rxkotlin rxandroid
+    api "io.reactivex.rxjava2:rxkotlin:$rxkotlin_version"
+    api "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
 }
