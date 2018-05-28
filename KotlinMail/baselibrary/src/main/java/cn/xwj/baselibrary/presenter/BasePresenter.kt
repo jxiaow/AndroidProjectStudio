@@ -1,6 +1,7 @@
 package cn.xwj.baselibrary.presenter
 
 import cn.xwj.baselibrary.presenter.view.BaseView
+import javax.inject.Inject
 
 /**
  * Author: xw
@@ -9,7 +10,7 @@ import cn.xwj.baselibrary.presenter.view.BaseView
  */
 open class BasePresenter<T : BaseView> {
 
-
+    @Inject
     lateinit var mView: T
 
 }

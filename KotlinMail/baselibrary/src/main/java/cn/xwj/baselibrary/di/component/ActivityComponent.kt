@@ -1,6 +1,7 @@
 package cn.xwj.baselibrary.di.component
 
 import android.app.Activity
+import android.content.Context
 import cn.xwj.baselibrary.di.module.ActivityModule
 import cn.xwj.baselibrary.di.scope.ActivityScope
 import dagger.Component
@@ -15,5 +16,7 @@ import dagger.Component
 interface ActivityComponent {
 
     fun activity(): Activity
+
+    fun context(): Context
 
 }

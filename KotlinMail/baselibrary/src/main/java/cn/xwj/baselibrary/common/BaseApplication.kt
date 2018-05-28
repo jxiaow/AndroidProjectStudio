@@ -1,6 +1,7 @@
 package cn.xwj.baselibrary.common
 
 import android.app.Application
+import cn.xwj.baselibrary.di.component.AppComponent
 import cn.xwj.baselibrary.di.component.DaggerAppComponent
 
 /**
@@ -10,14 +11,15 @@ import cn.xwj.baselibrary.di.component.DaggerAppComponent
  */
 open class BaseApplication : Application() {
 
+    lateinit var appComponent: AppComponent
+
     override fun onCreate() {
         super.onCreate()
         initAppInjection()
     }
 
     private fun initAppInjection() {
-        val appComponent = DaggerAppComponent.
-                builder()
+        appComponent = DaggerAppComponent.builder()
                 .context(this)
                 .build()
     }

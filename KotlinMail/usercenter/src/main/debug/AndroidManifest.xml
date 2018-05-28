@@ -3,6 +3,7 @@
     package="cn.xwj.usercenter">
 
     <application
+        android:name="cn.xwj.baselibrary.common.BaseApplication"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.activity.RegisterActivity">
             <intent-filter>
@@ -11,6 +12,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.activity.LoginActivity"></activity>
     </application>
 
 </manifest>

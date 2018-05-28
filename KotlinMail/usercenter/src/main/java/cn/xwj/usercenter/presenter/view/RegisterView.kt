@@ -9,4 +9,8 @@ import cn.xwj.baselibrary.presenter.view.BaseView
  */
 interface RegisterView : BaseView {
 
+    fun onRegisterResult(result: String)
+
+    fun onSendVerifyCode(result: Boolean)
+
 }

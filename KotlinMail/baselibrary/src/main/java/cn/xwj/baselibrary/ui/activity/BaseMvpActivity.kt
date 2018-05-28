@@ -1,6 +1,8 @@
 package cn.xwj.baselibrary.ui.activity
 
 import android.os.Bundle
+import cn.xwj.baselibrary.common.BaseApplication
+import cn.xwj.baselibrary.di.component.ActivityComponent
 import cn.xwj.baselibrary.di.component.DaggerActivityComponent
 import cn.xwj.baselibrary.di.module.ActivityModule
 import cn.xwj.baselibrary.di.scope.ActivityScope
@@ -14,20 +16,27 @@ import javax.inject.Inject
  * Description: BaseMvpActivity: .
  */
 @ActivityScope
-open class BaseMvpActivity<T : BasePresenter<*>> : BaseActivity(), BaseView {
+abstract class BaseMvpActivity<T : BasePresenter<*>> : BaseActivity(), BaseView {
 
 
     @Inject
     lateinit var mPresenter: T
 
+    lateinit var activityComponent: ActivityComponent
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initActivityComponent()
+        initPerComponent()
     }
 
+
     private fun initActivityComponent() {
-        DaggerActivityComponent.builder().activityModule(ActivityModule(this)).build()
+        activityComponent = DaggerActivityComponent.builder()
+                .appComponent((application as BaseApplication).appComponent)
+                .activityModule(ActivityModule(this))
+                .build()
     }
 
 
@@ -39,4 +48,10 @@ open class BaseMvpActivity<T : BasePresenter<*>> : BaseActivity(), BaseView {
 
     override fun showError(text: String) {
     }
+
+
+    /**
+     * 初始化每个dagger2
+     */
+    abstract fun initPerComponent()
 }

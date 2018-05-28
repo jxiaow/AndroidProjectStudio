@@ -11,12 +11,12 @@ import dagger.Provides
  * Description: ActivityModule: .
  */
 @Module
-class ActivityModule(private val activtiy: Activity) {
+class ActivityModule(private val activity: Activity) {
 
     @Provides
     @ActivityScope
     fun provideActivity(): Activity {
-        return activtiy
+        return activity
     }
 
 }

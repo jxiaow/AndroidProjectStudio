@@ -1,5 +1,8 @@
 package cn.xwj.usercenter.di.module
 
+import cn.xwj.baselibrary.di.scope.PerComponentScope
+import cn.xwj.baselibrary.presenter.view.BaseView
+import cn.xwj.usercenter.presenter.view.RegisterView
 import dagger.Module
 import dagger.Provides
 
@@ -9,11 +12,18 @@ import dagger.Provides
  * Description: UserModule: .
  */
 @Module
-class UserModule(val code: Int) {
+class UserModule {
+    private val registerView: RegisterView
 
+    constructor(view: RegisterView) {
+        registerView = view
+    }
+
+
+    @PerComponentScope
     @Provides
-    fun provideCode(): Int {
-        return code
+    fun provideRegisterView(): RegisterView {
+        return registerView
     }
 
 }
