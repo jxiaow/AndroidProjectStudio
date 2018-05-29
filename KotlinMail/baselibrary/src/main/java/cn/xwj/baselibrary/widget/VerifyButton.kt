@@ -51,7 +51,7 @@ class VerifyButton(mContext: Context, attrs: AttributeSet) : Button(mContext, at
         }
     }
 
-    fun removeRunable() {
+    private fun removeRunnable() {
         mHandler.removeCallbacks(countDown)
     }
 
@@ -59,7 +59,7 @@ class VerifyButton(mContext: Context, attrs: AttributeSet) : Button(mContext, at
         恢复到初始状态
      */
     fun resetCounter(vararg text: String) {
-        removeRunable()
+        removeRunnable()
         this.isEnabled = true
         if (text.isNotEmpty() && "" != text[0]) {
             this.text = text[0]

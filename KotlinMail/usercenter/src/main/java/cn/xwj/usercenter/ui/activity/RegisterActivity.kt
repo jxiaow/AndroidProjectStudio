@@ -12,6 +12,7 @@ import cn.xwj.usercenter.di.module.UserModule
 import cn.xwj.usercenter.presenter.RegisterPresenter
 import cn.xwj.usercenter.presenter.view.RegisterView
 import kotlinx.android.synthetic.main.activity_register.*
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
 /**
@@ -20,6 +21,8 @@ import org.jetbrains.anko.toast
 class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView {
     override fun onRegisterResult(result: String) {
         toast(result)
+        finish()
+        startActivity<LoginActivity>()
     }
 
     override fun onSendVerifyCode(result: Boolean) {
@@ -51,7 +54,6 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView {
         mRegisterBtn.enable(mPwdConfirmEt) { registerBtnEnable() }
 
 
-
         mVerifyCodeBtn.setOnClickListener {
             mVerifyCodeBtn.requestSendVerifyNumber()
             mPresenter.sendVerifyCode(mMobileEt.content)
@@ -61,7 +63,6 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView {
             mVerifyCodeBtn.resetCounter()
             mPresenter.register(mMobileEt.content, mPwdEt.content, mVerifyCodeEt.content)
         }
-
     }
 
 
