@@ -1,7 +1,8 @@
 package cn.xwj.usercenter.di.module
 
 import cn.xwj.baselibrary.di.scope.PerComponentScope
-import cn.xwj.baselibrary.presenter.view.BaseView
+import cn.xwj.usercenter.data.respository.UserDataSource
+import cn.xwj.usercenter.data.respository.UserRepository
 import cn.xwj.usercenter.presenter.view.RegisterView
 import dagger.Module
 import dagger.Provides
@@ -26,4 +27,10 @@ class UserModule {
         return registerView
     }
 
+
+    @PerComponentScope
+    @Provides
+    fun provideRepository(userRepository: UserRepository): UserDataSource {
+        return userRepository
+    }
 }

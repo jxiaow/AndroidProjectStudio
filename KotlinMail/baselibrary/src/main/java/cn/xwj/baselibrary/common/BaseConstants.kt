@@ -7,7 +7,7 @@ package cn.xwj.baselibrary.common
  */
 class BaseConstants {
     companion object {
-        const val BASE_URL = "http://192.168.1.83/server/"
+        const val BASE_URL = "http://192.168.100.67/server/"
         const val REQUEST_SUCCESS = 0
     }
 }

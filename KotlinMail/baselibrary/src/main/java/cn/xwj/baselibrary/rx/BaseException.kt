@@ -1,4 +1,4 @@
-package cn.xwj.baselibrary.ext
+package cn.xwj.baselibrary.rx
 
 /**
  * Author: xw

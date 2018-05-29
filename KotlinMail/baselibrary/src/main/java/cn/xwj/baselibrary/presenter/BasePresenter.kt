@@ -1,5 +1,6 @@
 package cn.xwj.baselibrary.presenter
 
+import android.arch.lifecycle.LifecycleOwner
 import cn.xwj.baselibrary.presenter.view.BaseView
 import javax.inject.Inject
 
@@ -13,4 +14,6 @@ open class BasePresenter<T : BaseView> {
     @Inject
     lateinit var mView: T
 
+    @Inject
+    lateinit var lifecycleOwner: LifecycleOwner
 }

@@ -3,8 +3,10 @@ package cn.xwj.usercenter.ui.activity
 import android.os.Bundle
 import cn.xwj.baselibrary.ext.afterTextChanged
 import cn.xwj.baselibrary.ext.content
+import cn.xwj.baselibrary.ext.enable
 import cn.xwj.baselibrary.ui.activity.BaseMvpActivity
 import cn.xwj.usercenter.R
+import cn.xwj.usercenter.R.id.*
 import cn.xwj.usercenter.di.component.DaggerUserComponent
 import cn.xwj.usercenter.di.module.UserModule
 import cn.xwj.usercenter.presenter.RegisterPresenter
@@ -17,7 +19,7 @@ import org.jetbrains.anko.toast
  */
 class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView {
     override fun onRegisterResult(result: String) {
-        toast("注册成功")
+        toast(result)
     }
 
     override fun onSendVerifyCode(result: Boolean) {
@@ -38,16 +40,36 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        mConfirmPwdET.afterTextChanged {
-            if (it.equals(mPwdET.content()).not()) toast("两次密码不一致")
-        }
+        initView()
+    }
 
-        mSendVerifyCodeBtn.setOnClickListener {
-            mPresenter.sendVerifyCode(mMobileNumberET.content())
+    private fun initView() {
+
+        mRegisterBtn.enable(mMobileEt) { registerBtnEnable() }
+        mRegisterBtn.enable(mVerifyCodeEt) { registerBtnEnable() }
+        mRegisterBtn.enable(mPwdEt) { registerBtnEnable() }
+        mRegisterBtn.enable(mPwdConfirmEt) { registerBtnEnable() }
+
+
+
+        mVerifyCodeBtn.setOnClickListener {
+            mVerifyCodeBtn.requestSendVerifyNumber()
+            mPresenter.sendVerifyCode(mMobileEt.content)
         }
 
         mRegisterBtn.setOnClickListener {
-            mPresenter.register(mMobileNumberET.content(), mPwdET.content(), mVerifyCodeET.content())
+            mVerifyCodeBtn.resetCounter()
+            mPresenter.register(mMobileEt.content, mPwdEt.content, mVerifyCodeEt.content)
         }
+
     }
+
+
+    /**
+     * 判断注册按钮是否可用
+     */
+    private fun registerBtnEnable(): Boolean = mMobileEt.content.isNotEmpty()
+            && mVerifyCodeEt.content.isNotEmpty()
+            && mPwdEt.content.isNotEmpty()
+            && mPwdConfirmEt.content.isNotEmpty()
 }

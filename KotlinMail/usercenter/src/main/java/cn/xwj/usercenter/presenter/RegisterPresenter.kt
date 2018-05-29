@@ -1,10 +1,11 @@
 package cn.xwj.usercenter.presenter
 
+import android.arch.lifecycle.LifecycleRegistryOwner
 import android.content.Context
 import cn.xwj.baselibrary.ext.execute
 import cn.xwj.baselibrary.presenter.BasePresenter
+import cn.xwj.baselibrary.rx.BaseSubscriber
 import cn.xwj.usercenter.data.respository.UserDataSource
-import cn.xwj.usercenter.data.respository.UserRespository
 import cn.xwj.usercenter.presenter.view.RegisterView
 import org.jetbrains.anko.toast
 import javax.inject.Inject
@@ -20,12 +21,16 @@ class RegisterPresenter @Inject constructor() : BasePresenter<RegisterView>() {
     lateinit var context: Context
 
     @Inject
-    lateinit var respository: UserDataSource
+    lateinit var repository: UserDataSource
 
     fun register(mobile: String, password: String, verifyCode: String) {
-        respository.register(mobile, password, verifyCode)
-                .execute()
-
+        mView.showLoading()
+        repository.register(mobile, password, verifyCode)
+                .execute(object : BaseSubscriber<Boolean>(mView) {
+                    override fun onNext(t: Boolean) {
+                        mView.onRegisterResult(if (t) "注册成功" else "注册失败")
+                    }
+                }, lifecycleOwner)
     }
 
     fun sendVerifyCode(mobile: String) {

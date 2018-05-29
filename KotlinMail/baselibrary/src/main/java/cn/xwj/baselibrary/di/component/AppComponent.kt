@@ -1,6 +1,5 @@
 package cn.xwj.baselibrary.di.component
 
-import android.app.Application
 import android.content.Context
 import cn.xwj.baselibrary.di.module.AppModule
 import dagger.BindsInstance

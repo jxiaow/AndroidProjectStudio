@@ -14,6 +14,6 @@ import retrofit2.http.POST
  */
 interface UserApi {
 
-    @POST("/userCenter/register")
+    @POST("userCenter/register")
     fun register(@Body registerReq: RegisterReq): Observable<BaseResp<String>>
 }

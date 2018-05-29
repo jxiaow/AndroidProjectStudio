@@ -44,7 +44,9 @@ dependencies {
     api "com.squareup.retrofit2:converter-gson:$retrofit_version"
     api "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
 
-    // rxkotlin rxandroid
+    // rxkotlin rxandroid rxliferecycler
     api "io.reactivex.rxjava2:rxkotlin:$rxkotlin_version"
     api "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
+    api "com.trello.rxlifecycle2:rxlifecycle-android-lifecycle-kotlin:$rxlifecycler_version"
+//    api "com.trello.rxlifecycle2:rxlifecycle-kotlin:$rxlifecycler_version"
 }

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cn.xwj.usercenter">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name="cn.xwj.baselibrary.common.BaseApplication"
         android:theme="@style/AppTheme">
