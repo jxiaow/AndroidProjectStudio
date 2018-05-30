@@ -48,6 +48,18 @@ fun <T> Observable<BaseResp<T>>.convertBoolean(): Observable<Boolean> {
     }
 }
 
+
+fun <T> Observable<BaseResp<T>>.convert(): Observable<T> {
+
+    return this.flatMap { it ->
+        when (it.status) {
+            REQUEST_SUCCESS -> Observable.just(it.data)
+            else -> Observable.error(BaseException(it.status, it.message))
+        }
+    }
+}
+
+
 fun <T> Observable<T>.execute(subscriber: BaseSubscriber<T>, owner: LifecycleOwner) {
     this.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

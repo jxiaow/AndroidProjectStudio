@@ -5,8 +5,7 @@ import cn.xwj.baselibrary.ext.execute
 import cn.xwj.baselibrary.presenter.BasePresenter
 import cn.xwj.baselibrary.rx.BaseSubscriber
 import cn.xwj.usercenter.data.respository.UserDataSource
-import cn.xwj.usercenter.presenter.view.RegisterView
-import org.jetbrains.anko.toast
+import cn.xwj.usercenter.presenter.view.ResetPwdView
 import javax.inject.Inject
 
 /**
@@ -14,7 +13,7 @@ import javax.inject.Inject
  * Date: 2018-05-25 15:06:12
  * Description: RegisterPresenter: 注册Presenter.
  */
-class RegisterPresenter @Inject constructor() : BasePresenter<RegisterView>() {
+class ResetPwdPresenter @Inject constructor() : BasePresenter<ResetPwdView>() {
 
     @Inject
     lateinit var context: Context
@@ -22,17 +21,16 @@ class RegisterPresenter @Inject constructor() : BasePresenter<RegisterView>() {
     @Inject
     lateinit var repository: UserDataSource
 
-    fun register(mobile: String, password: String, verifyCode: String) {
+    fun resetPwd(mobile: String, pwd: String) {
         mView.showLoading()
-        repository.register(mobile, password, verifyCode)
+        repository.resetPwd(mobile, pwd)
                 .execute(object : BaseSubscriber<Boolean>(mView) {
                     override fun onNext(t: Boolean) {
-                        if(t) mView.onRegisterResult("注册成功")
+                        if (t) {
+                            mView.onResetPwdResult("密码重置成功")
+                        }
                     }
                 }, lifecycleOwner)
     }
 
-    fun sendVerifyCode(mobile: String) {
-        context.toast("请求发送成功")
-    }
 }

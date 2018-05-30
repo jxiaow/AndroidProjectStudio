@@ -10,6 +10,12 @@ buildscript {
     ext.rxkotlin_version = '2.2.0'
     ext.rxandroid_version = '2.0.2'
     ext.rxlifecycler_version = '2.2.1'
+    ext.circleimage_version = '2.2.0'
+    ext.alertview_version = '1.0.3'
+    ext.takephoto_version = '4.0.3'
+    ext.glide_version = '4.7.1'
+
+
 
     repositories {
         google()
