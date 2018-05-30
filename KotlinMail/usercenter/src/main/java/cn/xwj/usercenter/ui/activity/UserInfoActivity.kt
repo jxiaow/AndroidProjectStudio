@@ -10,7 +10,6 @@ import cn.xwj.baselibrary.common.BaseConstants
 import cn.xwj.baselibrary.ui.activity.BaseMvpActivity
 import cn.xwj.usercenter.R
 import cn.xwj.usercenter.R.id.mUserIconIv
-import cn.xwj.usercenter.R.id.mUserIconView
 import cn.xwj.usercenter.di.component.DaggerUserComponent
 import cn.xwj.usercenter.di.module.UploadModule
 import cn.xwj.usercenter.di.module.UserModule
@@ -32,6 +31,7 @@ import com.kotlin.base.utils.GlideUtils
 import com.qiniu.android.http.ResponseInfo
 import com.qiniu.android.storage.UpCompletionHandler
 import com.qiniu.android.storage.UploadManager
+import kotlinx.android.synthetic.main.activity_user_info.*
 import org.json.JSONObject
 import java.io.File
 
