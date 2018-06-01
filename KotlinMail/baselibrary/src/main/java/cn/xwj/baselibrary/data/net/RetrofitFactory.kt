@@ -1,6 +1,7 @@
 package cn.xwj.baselibrary.data.net
 
 import cn.xwj.baselibrary.common.BaseConstants
+import cn.xwj.baselibrary.utils.AppPreferences
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -31,6 +32,7 @@ class RetrofitFactory {
                     .newBuilder()
                     .addHeader("Content-Type", "application/json")
                     .addHeader("charset", "utf-8")
+                    .addHeader("token", AppPreferences.instance.get(BaseConstants.KEY_SP_TOKEN, ""))
                     .build()
             chain.proceed(request)
         }

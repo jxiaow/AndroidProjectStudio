@@ -3,6 +3,7 @@ package cn.xwj.baselibrary.common
 import android.app.Application
 import cn.xwj.baselibrary.di.component.AppComponent
 import cn.xwj.baselibrary.di.component.DaggerAppComponent
+import cn.xwj.baselibrary.utils.AppPreferences
 
 /**
  * Author: xw
@@ -16,6 +17,7 @@ open class BaseApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         initAppInjection()
+        AppPreferences.instance.init(this)
     }
 
     private fun initAppInjection() {

@@ -10,4 +10,5 @@ import cn.xwj.baselibrary.presenter.view.BaseView
 interface UserInfoView : BaseView {
 
     fun onGetUploadTokenResult(result: String)
+    fun onEditUserResult(result: String)
 }

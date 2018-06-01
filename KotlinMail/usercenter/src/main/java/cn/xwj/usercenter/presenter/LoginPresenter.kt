@@ -7,6 +7,7 @@ import cn.xwj.baselibrary.rx.BaseSubscriber
 import cn.xwj.usercenter.data.protocol.UserInfo
 import cn.xwj.usercenter.data.respository.UserDataSource
 import cn.xwj.usercenter.presenter.view.LoginView
+import cn.xwj.usercenter.utils.UserPrefsUtils
 import javax.inject.Inject
 
 /**
@@ -27,6 +28,7 @@ class LoginPresenter @Inject constructor() : BasePresenter<LoginView>() {
         repository.login(mobile, password, pushId)
                 .execute(object : BaseSubscriber<UserInfo>(mView) {
                     override fun onNext(t: UserInfo) {
+                        UserPrefsUtils.putUserInfo(userInfo = t)
                         mView.onLoginResult("登录成功")
                     }
                 }, lifecycleOwner)

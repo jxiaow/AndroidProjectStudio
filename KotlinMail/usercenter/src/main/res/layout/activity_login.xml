@@ -6,6 +6,7 @@
     <com.kotlin.base.widgets.HeaderBar
         android:id="@+id/mHeaderBar"
         style="@style/MatchWrap"
+        app:isShowBack="false"
         app:rightText="注册"
         app:titleText="登录" />
 

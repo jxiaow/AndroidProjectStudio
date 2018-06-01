@@ -8,4 +8,7 @@ package cn.xwj.usercenter.data.protocol
 data class UserInfo(val id: String,
                     val userName: String,
                     val userMobile: String,
-                    val pushId: String)
+                    val pushId: String,
+                    val userIcon: String,
+                    val userGender: String,
+                    val userSign: String)

@@ -1,14 +1,15 @@
 package cn.xwj.baselibrary.ext
 
-import android.app.Activity
 import android.arch.lifecycle.LifecycleOwner
 import android.text.Editable
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import cn.xwj.baselibrary.common.BaseConstants.Companion.REQUEST_SUCCESS
 import cn.xwj.baselibrary.data.protocol.BaseResp
 import cn.xwj.baselibrary.rx.BaseException
 import cn.xwj.baselibrary.rx.BaseSubscriber
+import cn.xwj.baselibrary.utils.GlideUtils
 import cn.xwj.baselibrary.widget.DefaultTextWatcher
 import com.trello.rxlifecycle2.android.lifecycle.kotlin.bindToLifecycle
 import io.reactivex.Observable
@@ -30,8 +31,9 @@ fun EditText.afterTextChanged(f: (text: String?) -> Unit) {
     })
 }
 
-val EditText.content: String
+var EditText.content: String
     get() = this.text.toString()
+    set(value) = this.setText(value)
 
 
 fun Button.enable(editText: EditText, f: () -> Boolean) {
@@ -65,4 +67,8 @@ fun <T> Observable<T>.execute(subscriber: BaseSubscriber<T>, owner: LifecycleOwn
             .observeOn(AndroidSchedulers.mainThread())
             .bindToLifecycle(owner)
             .subscribe(subscriber)
+}
+
+fun ImageView.loadUrl(url: String) {
+    GlideUtils.loadImageFitCenter(context, url, this)
 }

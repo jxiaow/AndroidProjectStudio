@@ -10,5 +10,8 @@ class BaseConstants {
         const val BASE_URL = "http://192.168.100.67/server/"
         const val IMAGE_SERVER_ADDRESS = "http://osea2fxp7.bkt.clouddn.com/"
         const val REQUEST_SUCCESS = 0
+        const val SP_TABLE = "pref"
+        //Token Key
+        const val KEY_SP_TOKEN = "token"
     }
 }

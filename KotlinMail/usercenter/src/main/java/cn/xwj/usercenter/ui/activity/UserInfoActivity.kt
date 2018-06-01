@@ -7,14 +7,17 @@ import android.os.Environment
 import android.util.Log
 import android.view.View
 import cn.xwj.baselibrary.common.BaseConstants
+import cn.xwj.baselibrary.ext.content
+import cn.xwj.baselibrary.ext.loadUrl
 import cn.xwj.baselibrary.ui.activity.BaseMvpActivity
 import cn.xwj.usercenter.R
-import cn.xwj.usercenter.R.id.mUserIconIv
+import cn.xwj.usercenter.data.protocol.UserInfo
 import cn.xwj.usercenter.di.component.DaggerUserComponent
 import cn.xwj.usercenter.di.module.UploadModule
 import cn.xwj.usercenter.di.module.UserModule
 import cn.xwj.usercenter.presenter.UserInfoPresenter
 import cn.xwj.usercenter.presenter.view.UserInfoView
+import cn.xwj.usercenter.utils.UserPrefsUtils
 import com.bigkoo.alertview.AlertView
 import com.jph.takephoto.app.TakePhoto
 import com.jph.takephoto.app.TakePhotoImpl
@@ -27,12 +30,9 @@ import com.jph.takephoto.permission.PermissionManager
 import com.jph.takephoto.permission.PermissionManager.TPermissionType
 import com.jph.takephoto.permission.TakePhotoInvocationHandler
 import com.kotlin.base.utils.DateUtils
-import com.kotlin.base.utils.GlideUtils
-import com.qiniu.android.http.ResponseInfo
-import com.qiniu.android.storage.UpCompletionHandler
 import com.qiniu.android.storage.UploadManager
 import kotlinx.android.synthetic.main.activity_user_info.*
-import org.json.JSONObject
+import org.jetbrains.anko.toast
 import java.io.File
 
 
@@ -41,6 +41,9 @@ import java.io.File
  */
 class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView, View.OnClickListener,
         TakePhoto.TakeResultListener, InvokeListener {
+    override fun onEditUserResult(result: String) {
+        toast(result)
+    }
 
 
     private lateinit var invokeParam: InvokeParam
@@ -53,11 +56,9 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView, Vie
 
 
     override fun onGetUploadTokenResult(result: String) {
-        uploadManager.put(mLocalFileUrl, null, result, object : UpCompletionHandler {
-            override fun complete(key: String?, info: ResponseInfo?, response: JSONObject?) {
-                mRemoteFileUrl = BaseConstants.IMAGE_SERVER_ADDRESS + response?.get("hash")
-                GlideUtils.loadImageFitCenter(this@UserInfoActivity, mRemoteFileUrl!!, mUserIconIv)
-            }
+        uploadManager.put(mLocalFileUrl, null, result, { _, _, response ->
+            mRemoteFileUrl = BaseConstants.IMAGE_SERVER_ADDRESS + response?.get("hash")
+            mUserIconIv.loadUrl(mRemoteFileUrl!!)
         }, null)
     }
 
@@ -76,20 +77,44 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView, Vie
         setContentView(R.layout.activity_user_info)
 
         initView()
-
+        initData()
         getTakePhoto()
         takePhoto.onCreate(savedInstanceState)
 
     }
 
+    private fun initData() {
+        val userInfo: UserInfo? = UserPrefsUtils.getUserInfo()
+        userInfo?.let {
+            with(userInfo) {
+                mRemoteFileUrl = userIcon
+                mUserIconIv.loadUrl(userIcon)
+                mUserNameEt.content = userName
+                if (userGender == "0") {
+                    mGenderMaleRb.isChecked = true
+                } else {
+                    mGenderFemaleRb.isChecked = true
+                }
+                mUserMobileTv.text = userMobile
+                mUserSignEt.content = userSign
+            }
+        }
+    }
+
     private fun initView() {
         mUserIconView.setOnClickListener(this)
+        mHeaderBar.getRightView().setOnClickListener(this)
 
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.mUserIconView -> showAlertView()
+            R.id.mRightTv -> mPresenter.editUser(
+                    mRemoteFileUrl!!,
+                    mUserNameEt.content,
+                    if (mGenderMaleRb.isChecked) "0" else "1",
+                    mUserSignEt.content)
         }
     }
 
@@ -102,7 +127,7 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView, Vie
                 .setCancelText("取消")
                 .setDestructive("拍照", "从相册中选择")
                 .setOthers(null)
-                .setOnItemClickListener { o, position ->
+                .setOnItemClickListener { _, position ->
                     takePhoto.onEnableCompress(CompressConfig.ofDefaultConfig(), false)
                     when (position) {
                         0 -> {
@@ -170,6 +195,7 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView, Vie
     override fun takeSuccess(result: TResult?) {
         Log.d("takePhoto", "result: ${result?.image?.originalPath}")
         Log.d("takePhoto", "result: ${result?.image?.compressPath}")
+        mLocalFileUrl = result?.image?.compressPath
         mPresenter.getUploadToken()
     }
 

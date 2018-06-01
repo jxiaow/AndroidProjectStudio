@@ -15,6 +15,11 @@ import javax.inject.Inject
  * Description: UserRepository
  */
 class UserRepository @Inject constructor() : UserDataSource {
+    override fun editUser(userIcon: String, userName: String, userGender: String, userSign: String): Observable<UserInfo> {
+        return RetrofitFactory.instance.create(UserApi::class.java)
+                .editUser(EditUserReq(userIcon, userName, userGender, userSign))
+                .convert()
+    }
 
     override fun resetPwd(mobile: String, pwd: String): Observable<Boolean> {
         return RetrofitFactory.instance.create(UserApi::class.java)
