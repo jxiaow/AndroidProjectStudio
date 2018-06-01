@@ -32,6 +32,7 @@
         android:layout_marginRight="@dimen/common_margin_middle"
         android:layout_marginTop="@dimen/common_margin_small" />
 
+
     <TextView
         style="@style/MatchWrap"
         android:background="@color/common_white"

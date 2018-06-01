@@ -79,4 +79,6 @@ class BottomNavBar @JvmOverloads constructor(
     fun checkMsgBadge(isVisibility: Boolean) {
         if (isVisibility) mMsgBadgeItem.show() else mMsgBadgeItem.hide()
     }
+
+
 }

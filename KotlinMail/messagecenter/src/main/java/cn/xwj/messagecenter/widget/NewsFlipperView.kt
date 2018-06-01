@@ -29,12 +29,10 @@ class NewsFlipperView @JvmOverloads constructor(context: Context, attrs: Attribu
         构建公告
      */
     private fun buildNewsView(text: String): View {
-        val textView = TextView(context)
+              val textView = TextView(context)
         textView.text = text
         textView.textSize = px2sp(dimen(R.dimen.text_small_size))
         textView.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
-
-
         return textView
     }
 
