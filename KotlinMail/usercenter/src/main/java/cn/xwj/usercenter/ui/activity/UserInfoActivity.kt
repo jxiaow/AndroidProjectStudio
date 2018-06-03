@@ -10,6 +10,7 @@ import cn.xwj.baselibrary.common.BaseConstants
 import cn.xwj.baselibrary.ext.content
 import cn.xwj.baselibrary.ext.loadUrl
 import cn.xwj.baselibrary.ui.activity.BaseMvpActivity
+import cn.xwj.provider.common.RoutePath
 import cn.xwj.usercenter.R
 import cn.xwj.usercenter.data.protocol.UserInfo
 import cn.xwj.usercenter.di.component.DaggerUserComponent
@@ -18,6 +19,7 @@ import cn.xwj.usercenter.di.module.UserModule
 import cn.xwj.usercenter.presenter.UserInfoPresenter
 import cn.xwj.usercenter.presenter.view.UserInfoView
 import cn.xwj.usercenter.utils.UserPrefsUtils
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.bigkoo.alertview.AlertView
 import com.jph.takephoto.app.TakePhoto
 import com.jph.takephoto.app.TakePhotoImpl
@@ -39,6 +41,7 @@ import java.io.File
 /**
  * 注册
  */
+@Route(path = RoutePath.UserCenter.USER_INFO_PATH)
 class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView, View.OnClickListener,
         TakePhoto.TakeResultListener, InvokeListener {
     override fun onEditUserResult(result: String) {

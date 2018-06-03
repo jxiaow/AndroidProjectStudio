@@ -33,6 +33,16 @@
         <item name="android:windowNoTitle">true</item>
     </style>
 
+    <!-- 多状态视图样式-->
+    <style name="MultiStateStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="msv_loadingView">@layout/layout_state_loading</item>
+        <item name="msv_emptyView">@layout/layout_state_empty</item>
+        <item name="msv_errorView">@layout/layout_state_error</item>
+        <item name="msv_viewState">loading</item>
+    </style>
+
     <!-- 通用列表样式-->
     <style name="commonRecyclerView">
         <item name="android:scrollbars">none</item>
@@ -114,5 +124,27 @@
         <item name="android:padding">@dimen/common_padding_middle</item>
         <item name="android:layout_margin">@dimen/common_margin</item>
         <item name="android:enabled">false</item>
+    </style>
+
+    <!-- TabLayout文字样式-->
+    <style name="TabLayoutTextStyle">
+        <item name="android:textSize">@dimen/text_big_size</item>
+    </style>
+    <!-- TabLayout通用样式-->
+    <style name="TabsStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="tabIndicatorColor">@color/common_white</item>
+        <item name="tabBackground">@drawable/tab_selector</item>
+        <item name="tabTextAppearance">@style/TabLayoutTextStyle</item>
+        <item name="tabTextColor">@color/text_light_dark</item>
+        <item name="tabSelectedTextColor">@color/common_white</item>
+    </style>
+    <!-- 订单中Tab样式-->
+    <style name="TabsStyle.Order" parent="@style/TabsStyle">
+        <item name="tabIndicatorColor">@color/common_blue</item>
+        <item name="tabBackground">@drawable/border_bottom</item>
+        <item name="tabTextColor">@color/text_normal</item>
+        <item name="tabSelectedTextColor">@color/common_blue</item>
     </style>
 </resources>

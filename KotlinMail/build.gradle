@@ -14,7 +14,8 @@ buildscript {
     ext.alertview_version = '1.0.3'
     ext.takephoto_version = '4.0.3'
     ext.glide_version = '4.7.1'
-
+    ext.arouter_api_version='1.3.1'
+    ext.arouter_compile_version='1.1.4'
 
 
     repositories {

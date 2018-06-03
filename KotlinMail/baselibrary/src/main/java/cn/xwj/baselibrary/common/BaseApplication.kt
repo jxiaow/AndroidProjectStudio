@@ -1,9 +1,11 @@
 package cn.xwj.baselibrary.common
 
 import android.app.Application
+import cn.xwj.baselibrary.BuildConfig
 import cn.xwj.baselibrary.di.component.AppComponent
 import cn.xwj.baselibrary.di.component.DaggerAppComponent
 import cn.xwj.baselibrary.utils.AppPreferences
+import com.alibaba.android.arouter.launcher.ARouter
 
 /**
  * Author: xw
@@ -18,6 +20,12 @@ open class BaseApplication : Application() {
         super.onCreate()
         initAppInjection()
         AppPreferences.instance.init(this)
+
+        if (BuildConfig.DEBUG) {
+            ARouter.openLog();
+            ARouter.openDebug()
+        }
+        ARouter.init(this)
     }
 
     private fun initAppInjection() {

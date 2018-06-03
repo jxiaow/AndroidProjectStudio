@@ -5,12 +5,14 @@ import android.view.View
 import cn.xwj.baselibrary.ext.content
 import cn.xwj.baselibrary.ext.enable
 import cn.xwj.baselibrary.ui.activity.BaseMvpActivity
+import cn.xwj.provider.common.RoutePath
 import cn.xwj.usercenter.R
 import cn.xwj.usercenter.R.id.*
 import cn.xwj.usercenter.di.component.DaggerUserComponent
 import cn.xwj.usercenter.di.module.UserModule
 import cn.xwj.usercenter.presenter.LoginPresenter
 import cn.xwj.usercenter.presenter.view.LoginView
+import com.alibaba.android.arouter.facade.annotation.Route
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
@@ -18,6 +20,7 @@ import org.jetbrains.anko.toast
 /**
  * 注册
  */
+@Route(path = RoutePath.UserCenter.LOGIN_PATH)
 class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView, View.OnClickListener {
     override fun onLoginResult(result: String) {
         toast(result)

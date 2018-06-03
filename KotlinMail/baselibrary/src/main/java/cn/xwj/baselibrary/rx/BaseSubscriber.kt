@@ -16,6 +16,7 @@ open class BaseSubscriber<T>(val view: BaseView) : Observer<T> {
     override fun onComplete() {
         view.hideLoading()
         Log.d("TAG", "disposed: ${disposable?.isDisposed}")
+        disposable?.dispose()
     }
 
     override fun onSubscribe(d: Disposable) {

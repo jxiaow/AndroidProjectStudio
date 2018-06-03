@@ -12,7 +12,11 @@ import org.jetbrains.anko.*
 /*
     公告组件封装
  */
-class NewsFlipperView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : FrameLayout(context, attrs, defStyleAttr) {
+class NewsFlipperView @JvmOverloads constructor(context: Context,
+                                                attrs: AttributeSet? = null, defStyleAttr: Int = 0)
+    : FrameLayout(context, attrs, defStyleAttr) {
+
+
     private val mFlipperView: ViewFlipper
 
     init {

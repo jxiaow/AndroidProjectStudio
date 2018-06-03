@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment
 import cn.xwj.baselibrary.ui.activity.BaseActivity
 import cn.xwj.kotlinmail.R
 import cn.xwj.kotlinmail.ui.fragment.HomeFragment
+import cn.xwj.kotlinmail.ui.fragment.MyFragment
 import cn.xwj.kotlinmail.widget.DefaultOnTabSelectedListener
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
@@ -18,7 +19,7 @@ class MainActivity : BaseActivity() {
     private val mCategoryFragment: HomeFragment by lazy { HomeFragment() }
     private val mCartFragment: HomeFragment by lazy { HomeFragment() }
     private val mMsgFragment: HomeFragment by lazy { HomeFragment() }
-    private val mMyFragment: HomeFragment by lazy { HomeFragment() }
+    private val mMyFragment: MyFragment by lazy { MyFragment() }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,6 +28,7 @@ class MainActivity : BaseActivity() {
 
         initFragment()
         initBottomNavBar()
+        changeFragment(0)
     }
 
     private fun initBottomNavBar() {

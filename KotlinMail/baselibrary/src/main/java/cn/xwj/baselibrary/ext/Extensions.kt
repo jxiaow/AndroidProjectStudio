@@ -11,6 +11,7 @@ import cn.xwj.baselibrary.rx.BaseException
 import cn.xwj.baselibrary.rx.BaseSubscriber
 import cn.xwj.baselibrary.utils.GlideUtils
 import cn.xwj.baselibrary.widget.DefaultTextWatcher
+import com.kennyc.view.MultiStateView
 import com.trello.rxlifecycle2.android.lifecycle.kotlin.bindToLifecycle
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -70,5 +71,9 @@ fun <T> Observable<T>.execute(subscriber: BaseSubscriber<T>, owner: LifecycleOwn
 }
 
 fun ImageView.loadUrl(url: String) {
-    GlideUtils.loadImageFitCenter(context, url, this)
+    GlideUtils.loadUrlImage(context, url, this)
+}
+
+fun MultiStateView.startLoading() {
+    this.viewState = MultiStateView.VIEW_STATE_LOADING
 }
