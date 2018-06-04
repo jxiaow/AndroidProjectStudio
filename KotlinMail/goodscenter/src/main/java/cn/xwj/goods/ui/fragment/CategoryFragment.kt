@@ -11,6 +11,8 @@ import cn.xwj.baselibrary.ext.startLoading
 import cn.xwj.baselibrary.ui.adapter.BaseRecyclerViewAdapter
 import cn.xwj.baselibrary.ui.fragment.BaseMvpFragment
 import cn.xwj.goods.R
+import cn.xwj.goods.R.id.*
+import cn.xwj.goods.common.GoodsConstants
 import cn.xwj.goods.data.protocol.Category
 import cn.xwj.goods.di.component.DaggerCategoryComponent
 import cn.xwj.goods.di.module.CategoryModule
@@ -18,6 +20,8 @@ import cn.xwj.goods.presenter.CategoryPresenter
 import cn.xwj.goods.presenter.view.CategoryView
 import cn.xwj.goods.ui.adapter.SecondCategoryAdapter
 import cn.xwj.goods.ui.adapter.TopCategoryAdapter
+import cn.xwj.provider.common.RoutePath
+import com.alibaba.android.arouter.launcher.ARouter
 import com.kennyc.view.MultiStateView
 import kotlinx.android.synthetic.main.fragment_category.*
 
@@ -30,8 +34,8 @@ import kotlinx.android.synthetic.main.fragment_category.*
 class CategoryFragment : BaseMvpFragment<CategoryPresenter>(), CategoryView {
 
 
-    lateinit var topAdapter: TopCategoryAdapter
-    lateinit var secondCategoryAdapter: SecondCategoryAdapter
+    private lateinit var topAdapter: TopCategoryAdapter
+    private lateinit var secondCategoryAdapter: SecondCategoryAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
@@ -77,6 +81,14 @@ class CategoryFragment : BaseMvpFragment<CategoryPresenter>(), CategoryView {
 
         })
 
+        secondCategoryAdapter.setOnItemOnClickListener(object : BaseRecyclerViewAdapter.OnItemClickListener<Category> {
+            override fun onItemClick(item: Category, position: Int) {
+                ARouter.getInstance()
+                        .build(RoutePath.GoodsCenter.GET_GOODS_LIST)
+                        .withInt(GoodsConstants.KEY_CATEGORY_ID, item.id)
+                        .navigation()
+            }
+        })
     }
 
     override fun injectComponent() {

@@ -16,4 +16,11 @@ object RoutePath {
             const val USER_INFO_PATH = "$PATH/userInfo"
         }
     }
+
+    class GoodsCenter {
+        companion object {
+            private const val PATH = "/goodsCenter"
+            const val GET_GOODS_LIST = "$PATH/getGoodsList"
+        }
+    }
 }

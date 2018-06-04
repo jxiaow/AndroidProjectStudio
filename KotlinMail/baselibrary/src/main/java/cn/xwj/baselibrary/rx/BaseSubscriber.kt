@@ -12,11 +12,11 @@ import io.reactivex.disposables.Disposable
  */
 open class BaseSubscriber<T>(val view: BaseView) : Observer<T> {
     private var disposable: Disposable? = null
+    var mData: T? = null
 
     override fun onComplete() {
         view.hideLoading()
         Log.d("TAG", "disposed: ${disposable?.isDisposed}")
-        disposable?.dispose()
     }
 
     override fun onSubscribe(d: Disposable) {
@@ -24,6 +24,7 @@ open class BaseSubscriber<T>(val view: BaseView) : Observer<T> {
     }
 
     override fun onNext(t: T) {
+        mData = t
     }
 
     override fun onError(e: Throwable) {

@@ -3,7 +3,7 @@
     package="cn.xwj.goods">
 
     <application>
-        <activity android:name=".ui.GoodsActivity"></activity>
+        <activity android:name=".ui.activity.GoodsActivity"></activity>
     </application>
 
 </manifest>

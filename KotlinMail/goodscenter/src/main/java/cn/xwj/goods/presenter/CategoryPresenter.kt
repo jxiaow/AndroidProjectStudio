@@ -24,8 +24,9 @@ class CategoryPresenter @Inject constructor() : BasePresenter<CategoryView>() {
 
         repository.getCategory(parentId)
                 .execute(object : BaseSubscriber<MutableList<Category>?>(mView) {
-                    override fun onNext(t: MutableList<Category>?) {
-                        mView.onGetCategoryResult(t)
+                    override fun onComplete() {
+                        super.onComplete()
+                        mView.onGetCategoryResult(mData)
                     }
                 }, lifecycleOwner)
     }
