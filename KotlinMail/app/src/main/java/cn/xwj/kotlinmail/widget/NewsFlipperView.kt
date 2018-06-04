@@ -1,13 +1,15 @@
-package cn.xwj.messagecenter.widget
+package cn.xwj.kotlinmail.widget
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
-import android.widget.ViewFlipper
 import android.widget.TextView
-import cn.xwj.messagecenter.R
-import org.jetbrains.anko.*
+import android.widget.ViewFlipper
+import cn.xwj.kotlinmail.R
+import org.jetbrains.anko.dimen
+import org.jetbrains.anko.find
+import org.jetbrains.anko.px2sp
 
 /*
     公告组件封装
@@ -15,7 +17,6 @@ import org.jetbrains.anko.*
 class NewsFlipperView @JvmOverloads constructor(context: Context,
                                                 attrs: AttributeSet? = null, defStyleAttr: Int = 0)
     : FrameLayout(context, attrs, defStyleAttr) {
-
 
     private val mFlipperView: ViewFlipper
 
@@ -33,7 +34,7 @@ class NewsFlipperView @JvmOverloads constructor(context: Context,
         构建公告
      */
     private fun buildNewsView(text: String): View {
-              val textView = TextView(context)
+        val textView = TextView(context)
         textView.text = text
         textView.textSize = px2sp(dimen(R.dimen.text_small_size))
         textView.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)

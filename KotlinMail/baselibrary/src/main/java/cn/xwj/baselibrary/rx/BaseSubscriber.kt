@@ -35,5 +35,4 @@ open class BaseSubscriber<T>(val view: BaseView) : Observer<T> {
         disposable?.dispose()
         Log.d("TAG", "disposed: ${disposable?.isDisposed}")
     }
-
 }

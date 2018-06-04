@@ -17,6 +17,7 @@ import cn.xwj.goods.ui.adapter.GoodsListAdapter
 import cn.xwj.provider.common.RoutePath
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
 import com.kennyc.view.MultiStateView
 import kotlinx.android.synthetic.main.activity_goods.*
 
@@ -29,10 +30,13 @@ import kotlinx.android.synthetic.main.activity_goods.*
 class GoodsActivity : BaseMvpActivity<GoodsListPresenter>(), GoodsListView,
         BGARefreshLayout.BGARefreshLayoutDelegate {
 
-
-    @Autowired(name = GoodsConstants.KEY_CATEGORY_ID)
     @JvmField
-    var mCategoryId: Int = 1
+    @Autowired(name = GoodsConstants.EXTRA_CATEGORY_ID)
+    var mCategoryId: Int = -1
+
+    @JvmField
+    @Autowired(name = GoodsConstants.EXTRA_KEY_WORDS)
+    var mKeyWords: String = ""
 
 
     private var mCurrentPage: Int = 1
@@ -46,12 +50,20 @@ class GoodsActivity : BaseMvpActivity<GoodsListPresenter>(), GoodsListView,
 
         initView()
         initRefresh()
+        ARouter.getInstance().inject(this)
         loadData()
+
     }
 
     private fun loadData() {
-        mMultiStateView.startLoading()
-        mPresenter.getGoodsList(mCategoryId, mCurrentPage)
+
+        if(mKeyWords.isNotEmpty()){
+            mMultiStateView.startLoading()
+            mPresenter.getGoodsListByKeyWords(mKeyWords, mCurrentPage)
+        }else{
+            mMultiStateView.startLoading()
+            mPresenter.getGoodsList(mCategoryId, mCurrentPage)
+        }
     }
 
     private fun initRefresh() {

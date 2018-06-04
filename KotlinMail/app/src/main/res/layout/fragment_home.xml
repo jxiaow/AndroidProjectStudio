@@ -29,7 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="150dp" />
 
-            <cn.xwj.messagecenter.widget.NewsFlipperView
+            <cn.xwj.kotlinmail.widget.NewsFlipperView
                 android:id="@+id/mNewsFlipperView"
                 style="@style/MatchWrap"
                 android:layout_marginBottom="@dimen/common_margin_small"

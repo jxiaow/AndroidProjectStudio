@@ -31,4 +31,8 @@ class GoodsListPresenter @Inject constructor() : BasePresenter<GoodsListView>() 
                 }, lifecycleOwner)
     }
 
+    fun getGoodsListByKeyWords(mKeyWords: String, pageNo: Int) {
+
+    }
+
 }

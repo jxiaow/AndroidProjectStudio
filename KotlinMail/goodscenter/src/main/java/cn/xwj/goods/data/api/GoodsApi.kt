@@ -14,6 +14,6 @@ import retrofit2.http.POST
  */
 
 interface GoodsApi {
-    @POST("/goods/getGoodsList")
+    @POST("goods/getGoodsList")
     fun getGoodsList(@Body req: GetGoodsListReq): Observable<BaseResp<MutableList<Goods>?>>
 }

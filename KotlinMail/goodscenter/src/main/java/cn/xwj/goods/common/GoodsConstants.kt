@@ -7,6 +7,8 @@ package cn.xwj.goods.common
  */
 class GoodsConstants {
     companion object {
-        const val KEY_CATEGORY_ID: String = "key_category_id"
+        const val EXTRA_CATEGORY_ID: String = "extra_category_id"
+        const val EXTRA_KEY_WORDS: String = "extra_key_words"
+        const val SP_SEARCH_HISTORY = "sp_search_history"
     }
 }

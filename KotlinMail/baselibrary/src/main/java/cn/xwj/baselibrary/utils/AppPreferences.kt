@@ -24,8 +24,16 @@ class AppPreferences {
         val instance: AppPreferences by lazy { AppPreferences() }
     }
 
-    fun <T : Any> put(key: String, value: T) {
+    fun putStringSet(key: String, value: MutableSet<String>) {
+        sharedPreferences.edit().putStringSet(key, value).apply()
+    }
 
+    fun getStringSet(key: String, default: MutableSet<String>): MutableSet<String> {
+        return sharedPreferences.getStringSet(key, default)
+    }
+
+
+    fun <T : Any> put(key: String, value: T) {
         with(sharedPreferences.edit()) {
             when (value) {
                 is String -> putString(key, value)
@@ -50,6 +58,10 @@ class AppPreferences {
             }
             return res as T
         }
+    }
+
+    fun remove(key: String) {
+        sharedPreferences.edit().remove(key).apply()
     }
 
 }

@@ -36,7 +36,7 @@ import org.jetbrains.anko.support.v4.toast
  * Date: 2018-06-01 14:34:17
  * Description: HomeFragment: .
  */
-class HomeFragment : BaseFragment() {
+class HomeFragment : BaseFragment(), View.OnClickListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
@@ -106,6 +106,16 @@ class HomeFragment : BaseFragment() {
     private fun initView() {
         mScanIv.setOnClickListener {
             toast(R.string.coming_soon_tip)
+        }
+        mSearchEt.setOnClickListener(this)
+    }
+
+    override fun onClick(v: View) {
+        when (v.id) {
+            R.id.mScanIv -> toast(R.string.coming_soon_tip)
+            R.id.mSearchEt -> {
+
+            }
         }
     }
 }

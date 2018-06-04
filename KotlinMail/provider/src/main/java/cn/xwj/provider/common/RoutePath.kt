@@ -20,7 +20,9 @@ object RoutePath {
     class GoodsCenter {
         companion object {
             private const val PATH = "/goodsCenter"
+            const val GET_CATEGORY_FRAGMENT = "$PATH/getCategoryFragment"
             const val GET_GOODS_LIST = "$PATH/getGoodsList"
+            const val SEARCH_GOODS_BY_KEYWORD = "$PATH/searchGoodsByKeyWord"
         }
     }
 }

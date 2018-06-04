@@ -11,7 +11,6 @@ import cn.xwj.baselibrary.ext.startLoading
 import cn.xwj.baselibrary.ui.adapter.BaseRecyclerViewAdapter
 import cn.xwj.baselibrary.ui.fragment.BaseMvpFragment
 import cn.xwj.goods.R
-import cn.xwj.goods.R.id.*
 import cn.xwj.goods.common.GoodsConstants
 import cn.xwj.goods.data.protocol.Category
 import cn.xwj.goods.di.component.DaggerCategoryComponent
@@ -21,6 +20,7 @@ import cn.xwj.goods.presenter.view.CategoryView
 import cn.xwj.goods.ui.adapter.SecondCategoryAdapter
 import cn.xwj.goods.ui.adapter.TopCategoryAdapter
 import cn.xwj.provider.common.RoutePath
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.kennyc.view.MultiStateView
 import kotlinx.android.synthetic.main.fragment_category.*
@@ -31,6 +31,7 @@ import kotlinx.android.synthetic.main.fragment_category.*
  * Date: 2018-06-03 2018/6/3
  * Description: CategoryFragment
  */
+@Route(path = RoutePath.GoodsCenter.GET_CATEGORY_FRAGMENT)
 class CategoryFragment : BaseMvpFragment<CategoryPresenter>(), CategoryView {
 
 
