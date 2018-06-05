@@ -1,6 +1,5 @@
 package cn.xwj.baselibrary.ui.fragment
 
-import android.app.Application
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View

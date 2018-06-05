@@ -11,6 +11,7 @@ import cn.xwj.baselibrary.ext.startLoading
 import cn.xwj.baselibrary.ui.adapter.BaseRecyclerViewAdapter
 import cn.xwj.baselibrary.ui.fragment.BaseMvpFragment
 import cn.xwj.goods.R
+import cn.xwj.goods.R.id.*
 import cn.xwj.goods.common.GoodsConstants
 import cn.xwj.goods.data.protocol.Category
 import cn.xwj.goods.di.component.DaggerCategoryComponent
@@ -86,7 +87,7 @@ class CategoryFragment : BaseMvpFragment<CategoryPresenter>(), CategoryView {
             override fun onItemClick(item: Category, position: Int) {
                 ARouter.getInstance()
                         .build(RoutePath.GoodsCenter.GET_GOODS_LIST)
-                        .withInt(GoodsConstants.KEY_CATEGORY_ID, item.id)
+                        .withInt(GoodsConstants.EXTRA_CATEGORY_ID, item.id)
                         .navigation()
             }
         })

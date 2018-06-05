@@ -25,7 +25,9 @@ class AppPreferences {
     }
 
     fun putStringSet(key: String, value: MutableSet<String>) {
-        sharedPreferences.edit().putStringSet(key, value).apply()
+        val mutableSet = getStringSet(key, mutableSetOf())
+        mutableSet.addAll(value)
+        sharedPreferences.edit().putStringSet(key, mutableSet).apply()
     }
 
     fun getStringSet(key: String, default: MutableSet<String>): MutableSet<String> {

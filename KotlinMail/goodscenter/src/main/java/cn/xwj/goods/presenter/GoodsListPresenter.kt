@@ -31,8 +31,14 @@ class GoodsListPresenter @Inject constructor() : BasePresenter<GoodsListView>() 
                 }, lifecycleOwner)
     }
 
-    fun getGoodsListByKeyWords(mKeyWords: String, pageNo: Int) {
-
+    fun getGoodsListByKeyWords(keyWords: String, pageNo: Int) {
+        repository.getGoodsListByKeyWords(keyWords, pageNo)
+                .execute(object : BaseSubscriber<MutableList<Goods>?>(mView) {
+                    override fun onComplete() {
+                        super.onComplete()
+                        mView.onGoodsListResult(mData)
+                    }
+                }, lifecycleOwner)
     }
 
 }

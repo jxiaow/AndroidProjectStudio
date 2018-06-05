@@ -3,6 +3,7 @@ package cn.xwj.goods.di.module
 import cn.xwj.baselibrary.di.scope.PerComponentScope
 import cn.xwj.goods.data.repository.GoodsDataSource
 import cn.xwj.goods.data.repository.GoodsRepository
+import cn.xwj.goods.presenter.view.GoodsDetailView
 import cn.xwj.goods.presenter.view.GoodsListView
 import dagger.Module
 import dagger.Provides
@@ -14,11 +15,26 @@ import dagger.Provides
  * Description: GoodsModule
  */
 @Module
-class GoodsModule(private val goodsListView: GoodsListView) {
+class GoodsModule {
+
+    private lateinit var goodsListView: GoodsListView
+    private lateinit var goodsDetailView: GoodsDetailView
+
+    constructor(goodsListView: GoodsListView) {
+        this.goodsListView = goodsListView
+    }
+
+    constructor(goodsDetailView: GoodsDetailView) {
+        this.goodsDetailView = goodsDetailView
+    }
 
     @Provides
     @PerComponentScope
     fun provideGoodsListView(): GoodsListView = goodsListView
+
+    @Provides
+    @PerComponentScope
+    fun provideGoodsDetailView(): GoodsDetailView = goodsDetailView
 
     @Provides
     @PerComponentScope

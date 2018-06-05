@@ -39,14 +39,13 @@ class SearchGoodsActivity : BaseActivity(), View.OnClickListener {
                 .getStringSet(GoodsConstants.SP_SEARCH_HISTORY, mutableSetOf())
         mDataView.setVisiable(mutableSet.isNotEmpty())
         mNoDataTv.setVisiable(mutableSet.isEmpty())
-        if (mutableSet.isNotEmpty()) {
-            mAdapter.setData(mutableSet.toMutableList())
-        }
+        mAdapter.setData(mutableSet.toMutableList())
     }
 
     private fun initView() {
         mLeftIv.setOnClickListener(this)
         mSearchTv.setOnClickListener(this)
+        mClearBtn.setOnClickListener(this)
 
         val manager = LinearLayoutManager(this)
         manager.orientation = LinearLayoutManager.VERTICAL
@@ -58,7 +57,10 @@ class SearchGoodsActivity : BaseActivity(), View.OnClickListener {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.mLeftIv -> finish()
-            R.id.mClearBtn -> AppPreferences.instance.remove(GoodsConstants.SP_SEARCH_HISTORY)
+            R.id.mClearBtn -> {
+                AppPreferences.instance.remove(GoodsConstants.SP_SEARCH_HISTORY)
+                loadData()
+            }
             R.id.mSearchTv -> {
                 if (mKeywordEt.content.isEmpty()) {
                     toast("请输入需要搜索的关键字")
@@ -67,7 +69,7 @@ class SearchGoodsActivity : BaseActivity(), View.OnClickListener {
                     AppPreferences.instance.putStringSet(GoodsConstants.SP_SEARCH_HISTORY,
                             mutableSetOf(inputValue))
                     ARouter.getInstance()
-                            .build(RoutePath.GoodsCenter.SEARCH_GOODS_BY_KEYWORD)
+                            .build(RoutePath.GoodsCenter.GET_GOODS_LIST)
                             .withString(GoodsConstants.EXTRA_KEY_WORDS, inputValue)
                             .navigation()
 

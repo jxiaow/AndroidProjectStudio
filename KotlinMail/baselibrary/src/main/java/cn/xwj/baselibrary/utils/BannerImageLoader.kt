@@ -1,4 +1,4 @@
-package cn.xwj.kotlinmail.utils
+package cn.xwj.baselibrary.utils
 
 import android.content.Context
 import android.widget.ImageView

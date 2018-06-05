@@ -11,4 +11,6 @@ import io.reactivex.Observable
  */
 interface GoodsDataSource {
     fun getGoodsList(categoryId: Int, pageNo: Int): Observable<MutableList<Goods>?>
+    fun getGoodsListByKeyWords(keyWords: String, pageNo: Int): Observable<MutableList<Goods>?>
+    fun getGoodsDetail(goodsId: Int): Observable<Goods>
 }

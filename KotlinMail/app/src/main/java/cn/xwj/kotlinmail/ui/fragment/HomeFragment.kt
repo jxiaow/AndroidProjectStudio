@@ -10,7 +10,9 @@ import cn.xwj.baselibrary.ui.fragment.BaseFragment
 import cn.xwj.kotlinmail.R
 import cn.xwj.kotlinmail.ui.adapter.HomeDiscountAdapter
 import cn.xwj.kotlinmail.ui.adapter.TopicAdapter
-import cn.xwj.kotlinmail.utils.BannerImageLoader
+import cn.xwj.baselibrary.utils.BannerImageLoader
+import cn.xwj.provider.common.RoutePath
+import com.alibaba.android.arouter.launcher.ARouter
 import com.kotlin.mall.common.MainConstant.Companion.HOME_BANNER_FOUR
 import com.kotlin.mall.common.MainConstant.Companion.HOME_BANNER_ONE
 import com.kotlin.mall.common.MainConstant.Companion.HOME_BANNER_THREE
@@ -114,7 +116,9 @@ class HomeFragment : BaseFragment(), View.OnClickListener {
         when (v.id) {
             R.id.mScanIv -> toast(R.string.coming_soon_tip)
             R.id.mSearchEt -> {
-
+                ARouter.getInstance()
+                        .build(RoutePath.GoodsCenter.SEARCH_GOODS_BY_KEYWORD)
+                        .navigation()
             }
         }
     }

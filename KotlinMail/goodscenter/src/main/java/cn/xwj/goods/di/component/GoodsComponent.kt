@@ -2,10 +2,9 @@ package cn.xwj.goods.di.component
 
 import cn.xwj.baselibrary.di.component.ActivityComponent
 import cn.xwj.baselibrary.di.scope.PerComponentScope
-import cn.xwj.goods.di.module.CategoryModule
 import cn.xwj.goods.di.module.GoodsModule
 import cn.xwj.goods.ui.activity.GoodsActivity
-import cn.xwj.goods.ui.fragment.CategoryFragment
+import cn.xwj.goods.ui.fragment.GoodsDetailTabOneFragment
 import dagger.Component
 
 /**
@@ -19,4 +18,5 @@ import dagger.Component
 interface GoodsComponent {
 
     fun inject(goodsActivity: GoodsActivity)
+    fun inject(goodsDetailTabOneFragment: GoodsDetailTabOneFragment)
 }

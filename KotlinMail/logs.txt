@@ -1,0 +1,186 @@
+:app:preBuild UP-TO-DATE
+:baselibrary:preBuild UP-TO-DATE
+:baselibrary:preDebugBuild UP-TO-DATE
+:baselibrary:checkDebugManifest
+:baselibrary:processDebugManifest
+:goodscenter:preBuild UP-TO-DATE
+:goodscenter:preDebugBuild UP-TO-DATE
+:goodscenter:checkDebugManifest
+:goodscenter:processDebugManifest
+:provider:preBuild UP-TO-DATE
+:provider:preDebugBuild UP-TO-DATE
+:provider:checkDebugManifest
+:provider:processDebugManifest
+:usercenter:preBuild UP-TO-DATE
+:usercenter:preDebugBuild UP-TO-DATE
+:usercenter:checkDebugManifest
+:usercenter:processDebugManifest
+:app:preDebugBuild
+:baselibrary:compileDebugAidl
+:provider:compileDebugAidl
+:goodscenter:compileDebugAidl
+:usercenter:compileDebugAidl
+:app:compileDebugAidl
+:baselibrary:packageDebugRenderscript NO-SOURCE
+:goodscenter:packageDebugRenderscript NO-SOURCE
+:provider:packageDebugRenderscript NO-SOURCE
+:usercenter:packageDebugRenderscript NO-SOURCE
+:app:compileDebugRenderscript
+:app:checkDebugManifest
+:app:generateDebugBuildConfig
+:app:mainApkListPersistenceDebug
+:app:generateDebugResValues
+:app:generateDebugResources
+:baselibrary:compileDebugRenderscript
+:baselibrary:generateDebugResValues
+:baselibrary:generateDebugResources
+:baselibrary:packageDebugResources
+:goodscenter:compileDebugRenderscript
+:goodscenter:generateDebugResValues
+:goodscenter:generateDebugResources
+:goodscenter:packageDebugResources
+:provider:compileDebugRenderscript
+:provider:generateDebugResValues
+:provider:generateDebugResources
+:provider:packageDebugResources
+:usercenter:compileDebugRenderscript
+:usercenter:generateDebugResValues
+:usercenter:generateDebugResources
+:usercenter:packageDebugResources
+:app:mergeDebugResources
+:app:createDebugCompatibleScreenManifests
+:app:processDebugManifest
+:app:splitsDiscoveryTaskDebug
+:baselibrary:platformAttrExtractor
+:goodscenter:platformAttrExtractor
+:provider:platformAttrExtractor
+:usercenter:platformAttrExtractor
+:baselibrary:generateDebugBuildConfig
+:baselibrary:prepareLintJar
+:baselibrary:processDebugJavaRes NO-SOURCE
+:goodscenter:generateDebugBuildConfig
+:provider:generateDebugBuildConfig
+:provider:prepareLintJar
+:provider:processDebugJavaRes NO-SOURCE
+:goodscenter:prepareLintJar
+:goodscenter:processDebugJavaRes NO-SOURCE
+:usercenter:generateDebugBuildConfig
+:usercenter:prepareLintJar
+:usercenter:processDebugJavaRes NO-SOURCE
+:app:prepareLintJar
+:app:compileDebugNdk NO-SOURCE
+:app:mergeDebugShaders
+:app:compileDebugShaders
+:app:generateDebugAssets
+:baselibrary:mergeDebugShaders
+:baselibrary:compileDebugShaders
+:baselibrary:generateDebugAssets
+:baselibrary:packageDebugAssets
+:goodscenter:mergeDebugShaders
+:goodscenter:compileDebugShaders
+:goodscenter:generateDebugAssets
+:goodscenter:packageDebugAssets
+:provider:mergeDebugShaders
+:provider:compileDebugShaders
+:provider:generateDebugAssets
+:provider:packageDebugAssets
+:usercenter:mergeDebugShaders
+:usercenter:compileDebugShaders
+:usercenter:generateDebugAssets
+:usercenter:packageDebugAssets
+:app:mergeDebugAssets
+:app:mergeDebugJniLibFolders
+:baselibrary:compileDebugNdk NO-SOURCE
+:baselibrary:mergeDebugJniLibFolders
+:baselibrary:transformNativeLibsWithMergeJniLibsForDebug
+:baselibrary:transformNativeLibsWithStripDebugSymbolForDebug
+:baselibrary:transformNativeLibsWithIntermediateJniLibsForDebug
+:goodscenter:compileDebugNdk NO-SOURCE
+:goodscenter:mergeDebugJniLibFolders
+:goodscenter:transformNativeLibsWithMergeJniLibsForDebug
+:goodscenter:transformNativeLibsWithStripDebugSymbolForDebug
+:goodscenter:transformNativeLibsWithIntermediateJniLibsForDebug
+:provider:compileDebugNdk NO-SOURCE
+:provider:mergeDebugJniLibFolders
+:provider:transformNativeLibsWithMergeJniLibsForDebug
+:provider:transformNativeLibsWithStripDebugSymbolForDebug
+:provider:transformNativeLibsWithIntermediateJniLibsForDebug
+:usercenter:compileDebugNdk NO-SOURCE
+:usercenter:mergeDebugJniLibFolders
+:usercenter:transformNativeLibsWithMergeJniLibsForDebug
+:usercenter:transformNativeLibsWithStripDebugSymbolForDebug
+:usercenter:transformNativeLibsWithIntermediateJniLibsForDebug
+:app:processDebugJavaRes NO-SOURCE
+:app:validateSigningDebug
+:baselibrary:preReleaseBuild UP-TO-DATE
+:baselibrary:checkReleaseManifest
+:baselibrary:processReleaseManifest
+:goodscenter:preReleaseBuild UP-TO-DATE
+:goodscenter:checkReleaseManifest
+:goodscenter:processReleaseManifest
+:provider:preReleaseBuild UP-TO-DATE
+:provider:checkReleaseManifest
+:provider:processReleaseManifest
+:usercenter:preReleaseBuild UP-TO-DATE
+:usercenter:checkReleaseManifest
+:usercenter:processReleaseManifest
+:app:preReleaseBuild
+:baselibrary:compileReleaseAidl
+:provider:compileReleaseAidl
+:goodscenter:compileReleaseAidl
+:usercenter:compileReleaseAidl
+:app:compileReleaseAidl
+:baselibrary:packageReleaseRenderscript NO-SOURCE
+:goodscenter:packageReleaseRenderscript NO-SOURCE
+:provider:packageReleaseRenderscript NO-SOURCE
+:usercenter:packageReleaseRenderscript NO-SOURCE
+:app:compileReleaseRenderscript
+:baselibrary:generateDebugRFile
+:provider:generateDebugRFile
+:goodscenter:generateDebugRFile
+:usercenter:generateDebugRFile
+:app:processDebugResources
+:baselibrary:kaptGenerateStubsDebugKotlin
+:baselibrary:kaptDebugKotlin
+w: 注: [1] Wrote GeneratedAppGlideModule with: []
+w: 注: ARouter::Compiler >>> AutowiredProcessor init. <<<
+w: 警告: 来自注释处理程序 'org.jetbrains.kotlin.kapt3.ProcessorWrapper' 的受支持 source 版本 'RELEASE_7' 低于 -source '1.8'
+w: 注: ARouter::Compiler The user has configuration the module name, it was [baselibrary]
+w: 注: ARouter::Compiler >>> InterceptorProcessor init. <<<
+w: 警告: 来自注释处理程序 'org.jetbrains.kotlin.kapt3.ProcessorWrapper' 的受支持 source 版本 'RELEASE_7' 低于 -source '1.8'
+w: 注: ARouter::Compiler The user has configuration the module name, it was [baselibrary]
+w: 注: ARouter::Compiler >>> RouteProcessor init. <<<
+w: 警告: 来自注释处理程序 'org.jetbrains.kotlin.kapt3.ProcessorWrapper' 的受支持 source 版本 'RELEASE_7' 低于 -source '1.8'
+w: 警告: 以下选项未被任何处理程序识别: '[moduleName, kapt.kotlin.generated]'
+:baselibrary:compileDebugKotlin
+w: F:\AndroidProjectStudio\KotlinMail\baselibrary\src\main\java\cn\xwj\baselibrary\utils\AppPreferences.kt: (61, 24): Unchecked cast: Any to T
+w: F:\AndroidProjectStudio\KotlinMail\baselibrary\src\main\java\cn\xwj\baselibrary\utils\DateUtils.kt: (219, 27): Variable 'date' initializer is redundant
+w: F:\AndroidProjectStudio\KotlinMail\baselibrary\src\main\java\cn\xwj\baselibrary\widget\VerifyButton.kt: (41, 60): 'getColor(Int): Int' is deprecated. Deprecated in Java
+w: F:\AndroidProjectStudio\KotlinMail\baselibrary\src\main\java\cn\xwj\baselibrary\widget\VerifyButton.kt: (42, 54): 'getColor(Int): Int' is deprecated. Deprecated in Java
+w: F:\AndroidProjectStudio\KotlinMail\baselibrary\src\main\java\cn\xwj\baselibrary\widget\VerifyButton.kt: (69, 43): 'getColor(Int): Int' is deprecated. Deprecated in Java
+w: F:\AndroidProjectStudio\KotlinMail\baselibrary\src\main\java\cn\xwj\baselibrary\widget\VerifyButton.kt: (70, 37): 'getColor(Int): Int' is deprecated. Deprecated in Java
+:baselibrary:generateDebugSources
+:baselibrary:javaPreCompileDebug
+:baselibrary:compileDebugJavaWithJavac
+:baselibrary:transformClassesAndResourcesWithPrepareIntermediateJarsForDebug
+:provider:kaptGenerateStubsDebugKotlin
+:provider:kaptDebugKotlin
+w: 注: ARouter::Compiler >>> AutowiredProcessor init. <<<
+w: 警告: 来自注释处理程序 'org.jetbrains.kotlin.kapt3.ProcessorWrapper' 的受支持 source 版本 'RELEASE_7' 低于 -source '1.8'
+w: 注: ARouter::Compiler The user has configuration the module name, it was [provider]
+w: 注: ARouter::Compiler >>> InterceptorProcessor init. <<<
+w: 警告: 来自注释处理程序 'org.jetbrains.kotlin.kapt3.ProcessorWrapper' 的受支持 source 版本 'RELEASE_7' 低于 -source '1.8'
+w: 注: ARouter::Compiler The user has configuration the module name, it was [provider]
+w: 注: ARouter::Compiler >>> RouteProcessor init. <<<
+w: 警告: 来自注释处理程序 'org.jetbrains.kotlin.kapt3.ProcessorWrapper' 的受支持 source 版本 'RELEASE_7' 低于 -source '1.8'
+w: 警告: 以下选项未被任何处理程序识别: '[moduleName, kapt.kotlin.generated]'
+:provider:compileDebugKotlin
+:provider:generateDebugSources
+:provider:javaPreCompileDebug
+:provider:compileDebugJavaWithJavac
+:provider:transformClassesAndResourcesWithPrepareIntermediateJarsForDebug
+:goodscenter:kaptGenerateStubsDebugKotlin
+w: Runtime JAR files in the classpath have the version 1.1, which is older than the API version 1.2. Consider using the runtime of version 1.2, or pass '-api-version 1.1' explicitly to restrict the available APIs to the runtime of version 1.1. You can also pass '-language-version 1.1' instead, which will restrict not only the APIs to the specified version, but also the language features
+w: E:\Android-Config\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-stdlib\1.1.60\ac63d0e86e690fe4eded7f1f8998996c28499989\kotlin-stdlib-1.1.60.jar: Runtime JAR file has version 1.1 which is older than required for API version 1.2
+:goodscenter:kaptGenerateStubsDebugKotlin FAILED
+114 actionable tasks: 114 executed

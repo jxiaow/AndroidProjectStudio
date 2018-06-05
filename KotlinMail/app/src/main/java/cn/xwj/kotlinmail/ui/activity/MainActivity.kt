@@ -3,6 +3,7 @@ package cn.xwj.kotlinmail.ui.activity
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import cn.xwj.baselibrary.ui.activity.BaseActivity
+import cn.xwj.goods.ui.fragment.CategoryFragment
 import cn.xwj.kotlinmail.R
 import cn.xwj.kotlinmail.ui.fragment.HomeFragment
 import cn.xwj.kotlinmail.ui.fragment.MyFragment
@@ -18,9 +19,7 @@ class MainActivity : BaseActivity() {
     private val mStack = Stack<Fragment>()
 
     private val mHomeFragment: HomeFragment by lazy { HomeFragment() }
-    private val mCategoryFragment: Fragment by lazy {
-        ARouter.getInstance().build(RoutePath.GoodsCenter.GET_CATEGORY_FRAGMENT).navigation() as Fragment
-    }
+    private val mCategoryFragment: CategoryFragment by lazy { CategoryFragment() }
     private val mCartFragment: HomeFragment by lazy { HomeFragment() }
     private val mMsgFragment: HomeFragment by lazy { HomeFragment() }
     private val mMyFragment: MyFragment by lazy { MyFragment() }
@@ -33,6 +32,8 @@ class MainActivity : BaseActivity() {
         initFragment()
         initBottomNavBar()
         changeFragment(0)
+
+
     }
 
     private fun initBottomNavBar() {

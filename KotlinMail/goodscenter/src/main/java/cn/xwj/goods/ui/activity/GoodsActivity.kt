@@ -6,10 +6,12 @@ import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout
 import cn.xwj.baselibrary.ext.startLoading
 import cn.xwj.baselibrary.ui.activity.BaseMvpActivity
+import cn.xwj.baselibrary.ui.adapter.BaseRecyclerViewAdapter
 import cn.xwj.goods.R
+import cn.xwj.goods.R.id.mMultiStateView
+import cn.xwj.goods.R.id.mRefreshLayout
 import cn.xwj.goods.common.GoodsConstants
 import cn.xwj.goods.data.protocol.Goods
-import cn.xwj.goods.di.component.DaggerGoodsComponent
 import cn.xwj.goods.di.module.GoodsModule
 import cn.xwj.goods.presenter.GoodsListPresenter
 import cn.xwj.goods.presenter.view.GoodsListView
@@ -20,6 +22,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.kennyc.view.MultiStateView
 import kotlinx.android.synthetic.main.activity_goods.*
+import org.jetbrains.anko.startActivity
 
 /**
  * Author: xw
@@ -32,7 +35,7 @@ class GoodsActivity : BaseMvpActivity<GoodsListPresenter>(), GoodsListView,
 
     @JvmField
     @Autowired(name = GoodsConstants.EXTRA_CATEGORY_ID)
-    var mCategoryId: Int = -1
+    var mCategoryId: Int = 1
 
     @JvmField
     @Autowired(name = GoodsConstants.EXTRA_KEY_WORDS)
@@ -57,10 +60,10 @@ class GoodsActivity : BaseMvpActivity<GoodsListPresenter>(), GoodsListView,
 
     private fun loadData() {
 
-        if(mKeyWords.isNotEmpty()){
+        if (mKeyWords != null && mKeyWords.isNotEmpty()) {
             mMultiStateView.startLoading()
             mPresenter.getGoodsListByKeyWords(mKeyWords, mCurrentPage)
-        }else{
+        } else {
             mMultiStateView.startLoading()
             mPresenter.getGoodsList(mCategoryId, mCurrentPage)
         }
@@ -80,10 +83,16 @@ class GoodsActivity : BaseMvpActivity<GoodsListPresenter>(), GoodsListView,
         goodsListAdapter = GoodsListAdapter()
         mGoodsRv.layoutManager = manager
         mGoodsRv.adapter = goodsListAdapter
+
+        goodsListAdapter.setOnItemOnClickListener(object :
+                BaseRecyclerViewAdapter.OnItemClickListener<Goods> {
+            override fun onItemClick(item: Goods, position: Int) {
+                startActivity<GoodsDetailActivity>(GoodsConstants.EXTRA_GOODS_ID to item.id)
+            }
+        })
     }
 
     override fun initPerComponent() {
-
         DaggerGoodsComponent.builder().activityComponent(activityComponent)
                 .goodsModule(GoodsModule(this))
                 .build().inject(this)

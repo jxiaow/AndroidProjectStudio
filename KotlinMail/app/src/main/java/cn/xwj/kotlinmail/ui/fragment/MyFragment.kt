@@ -1,45 +1,19 @@
 package cn.xwj.kotlinmail.ui.fragment
 
 import android.os.Bundle
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import cn.xwj.baselibrary.common.BaseConstants
 import cn.xwj.baselibrary.ext.loadUrl
 import cn.xwj.baselibrary.ui.fragment.BaseFragment
 import cn.xwj.baselibrary.utils.AppPreferences
 import cn.xwj.kotlinmail.R
-import cn.xwj.kotlinmail.ui.adapter.HomeDiscountAdapter
-import cn.xwj.kotlinmail.ui.adapter.TopicAdapter
-import cn.xwj.kotlinmail.utils.BannerImageLoader
 import cn.xwj.provider.common.RoutePath
 import cn.xwj.provider.ext.afterLogin
 import cn.xwj.provider.ext.isLogin
 import com.alibaba.android.arouter.launcher.ARouter
-import com.kotlin.mall.common.MainConstant.Companion.HOME_BANNER_FOUR
-import com.kotlin.mall.common.MainConstant.Companion.HOME_BANNER_ONE
-import com.kotlin.mall.common.MainConstant.Companion.HOME_BANNER_THREE
-import com.kotlin.mall.common.MainConstant.Companion.HOME_BANNER_TWO
-import com.kotlin.mall.common.MainConstant.Companion.HOME_DISCOUNT_FIVE
-import com.kotlin.mall.common.MainConstant.Companion.HOME_DISCOUNT_FOUR
-import com.kotlin.mall.common.MainConstant.Companion.HOME_DISCOUNT_ONE
-import com.kotlin.mall.common.MainConstant.Companion.HOME_DISCOUNT_THREE
-import com.kotlin.mall.common.MainConstant.Companion.HOME_DISCOUNT_TWO
-import com.kotlin.mall.common.MainConstant.Companion.HOME_TOPIC_FIVE
-import com.kotlin.mall.common.MainConstant.Companion.HOME_TOPIC_FOUR
-import com.kotlin.mall.common.MainConstant.Companion.HOME_TOPIC_ONE
-import com.kotlin.mall.common.MainConstant.Companion.HOME_TOPIC_THREE
-import com.kotlin.mall.common.MainConstant.Companion.HOME_TOPIC_TWO
 import com.kotlin.provider.common.ProviderConstant
-import com.youth.banner.BannerConfig
-import com.youth.banner.Transformer
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_me.*
-import me.crosswall.lib.coverflow.CoverFlow
-import org.jetbrains.anko.imageResource
-import org.jetbrains.anko.support.v4.toast
 
 /**
  * Author: xw

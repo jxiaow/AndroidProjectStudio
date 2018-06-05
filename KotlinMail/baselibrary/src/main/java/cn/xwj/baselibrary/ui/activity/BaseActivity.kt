@@ -2,6 +2,8 @@ package cn.xwj.baselibrary.ui.activity
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
+import android.view.ViewGroup
 import cn.xwj.baselibrary.utils.AppManager
 
 /**
@@ -20,4 +22,11 @@ open class BaseActivity : AppCompatActivity() {
         super.onDestroy()
         AppManager.instances.removeActivity(this)
     }
+
+
+    val contentView: View
+        get() {
+            val parent = this.window.decorView as ViewGroup
+            return parent.getChildAt(0)
+        }
 }
