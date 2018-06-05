@@ -68,10 +68,11 @@
             <ren.qinc.numberbutton.NumberButton
                 android:id="@+id/mSkuCountBtn"
                 style="@style/WrapWrap"
+                android:layout_centerHorizontal="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/common_margin"
-                zhy:editable="false" />
+                zhy:editable="true" />
         </RelativeLayout>
 
         <Button

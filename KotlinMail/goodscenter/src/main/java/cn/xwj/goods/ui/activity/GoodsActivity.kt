@@ -12,6 +12,7 @@ import cn.xwj.goods.R.id.mMultiStateView
 import cn.xwj.goods.R.id.mRefreshLayout
 import cn.xwj.goods.common.GoodsConstants
 import cn.xwj.goods.data.protocol.Goods
+import cn.xwj.goods.di.component.DaggerGoodsComponent
 import cn.xwj.goods.di.module.GoodsModule
 import cn.xwj.goods.presenter.GoodsListPresenter
 import cn.xwj.goods.presenter.view.GoodsListView

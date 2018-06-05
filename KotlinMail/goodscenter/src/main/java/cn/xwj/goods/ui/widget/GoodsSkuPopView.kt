@@ -11,33 +11,44 @@ import cn.xwj.baselibrary.widget.DefaultTextWatcher
 import cn.xwj.goods.R
 import cn.xwj.goods.common.GoodsConstants
 import cn.xwj.goods.data.protocol.GoodsSku
+import cn.xwj.goods.event.SkuChangedEvent
 import cn.xwj.goods.utils.YuanFenConverter
+import com.eightbitlab.rxbus.Bus
 import kotlinx.android.synthetic.main.layout_sku_pop.view.*
 import org.jetbrains.anko.editText
 
 /**
  * Author: xw
- * Date: 2018-06-05 14:15:00
- * Description: GoodsSkuPop: .
+ * Date: 2018-06-05 16:31:36
+ * Description: GoodsSkuPopView: .
+ */
+/*
+    商品SKU弹层
  */
 class GoodsSkuPopView(context: Context) : PopupWindow(context), View.OnClickListener {
-
-    private val mRootView: View = LayoutInflater.from(context)
-            .inflate(R.layout.layout_sku_pop, null)
+    //根视图
+    private val mRootView: View
     private val mContext: Context = context
     private val mSkuViewList = arrayListOf<SkuView>()
 
     init {
+        mRootView = LayoutInflater.from(mContext).inflate(R.layout.layout_sku_pop, null)
         initView()
-        this.contentView = mRootView
-        this.width = ViewGroup.LayoutParams.MATCH_PARENT
-        this.height = ViewGroup.LayoutParams.MATCH_PARENT
-        this.isFocusable = true
-        this.animationStyle = R.style.AnimBottom
-        this.background.alpha = 150
 
+        // 设置SelectPicPopupWindow的View
+        this.contentView = mRootView
+        // 设置SelectPicPopupWindow弹出窗体的宽
+        this.width = ViewGroup.LayoutParams.MATCH_PARENT
+        // 设置SelectPicPopupWindow弹出窗体的高
+        this.height = ViewGroup.LayoutParams.MATCH_PARENT
+        // 设置SelectPicPopupWindow弹出窗体可点击
+        this.isFocusable = true
+        // 设置SelectPicPopupWindow弹出窗体动画效果
+        this.animationStyle = R.style.AnimBottom
+        background.alpha = 150
+        // mMenuView添加OnTouchListener监听判断获取触屏位置如果在选择框外面则销毁弹出框
         mRootView.setOnTouchListener { _, event ->
-            val height = mRootView.mPopView.top
+            val height = mRootView.findViewById<View>(R.id.mPopView).top
             val y = event.y.toInt()
             if (event.action == MotionEvent.ACTION_UP) {
                 if (y < height) {
@@ -47,22 +58,30 @@ class GoodsSkuPopView(context: Context) : PopupWindow(context), View.OnClickList
             true
         }
 
+
     }
 
+    /*
+        初始化视图
+     */
     private fun initView() {
-        with(mRootView) {
-            mCloseIv.setOnClickListener(this@GoodsSkuPopView)
-            mAddCartBtn.setOnClickListener(this@GoodsSkuPopView)
-            mSkuCountBtn.setCurrentNumber(1)
-            mSkuCountBtn.editText().addTextChangedListener(object : DefaultTextWatcher() {
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    super.onTextChanged(s, start, before, count)
-                    //发送信息
+        mRootView.mCloseIv.setOnClickListener(this)
+        mRootView.mAddCartBtn.setOnClickListener(this)
+
+        mRootView.mSkuCountBtn.setCurrentNumber(1)
+        mRootView.mSkuCountBtn.editText().addTextChangedListener(
+                object : DefaultTextWatcher() {
+                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                        Bus.send(SkuChangedEvent())
+                    }
                 }
-            })
+
+        )
+
+        mRootView.mAddCartBtn.setOnClickListener {
+            dismiss()
         }
     }
-
 
     /*
         设置商品图标
@@ -122,8 +141,4 @@ class GoodsSkuPopView(context: Context) : PopupWindow(context), View.OnClickList
             }
         }
     }
-
-}
-
-
 }

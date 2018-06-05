@@ -12,5 +12,6 @@ class GoodsConstants {
         const val EXTRA_GOODS_ID: String = "extra_goods_id"
         const val SP_SEARCH_HISTORY = "sp_search_history"
         const val SKU_SEPARATOR = ","
+        const val SP_CART_SIZE: String="sp_cart_size"
     }
 }

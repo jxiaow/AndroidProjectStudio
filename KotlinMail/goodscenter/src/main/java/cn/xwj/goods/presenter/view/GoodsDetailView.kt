@@ -13,4 +13,6 @@ import cn.xwj.goods.data.protocol.Goods
 interface GoodsDetailView : BaseView {
     //获取商品详情
     fun onGetGoodsDetailResult(result: Goods)
+
+    fun onAddCartResult(result: Int)
 }

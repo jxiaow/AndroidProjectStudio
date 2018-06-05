@@ -9,22 +9,30 @@ import cn.xwj.goods.ui.fragment.GoodsDetailTabTwoFragment
 
 /**
  * Author: xw
- * Date: 2018-06-05 11:24:11
+ * Date: 2018-06-05 16:26:15
  * Description: GoodsDetailVpAdapter: .
  */
-class GoodsDetailVpAdapter(private val supportManager: FragmentManager, val context: Context)
-    : FragmentPagerAdapter(supportManager) {
+/*
+    商品详情ViewPager Adapter
+ */
+class GoodsDetailVpAdapter(fm: FragmentManager, context: Context)
+    : FragmentPagerAdapter(fm) {
 
-    private val titles = arrayListOf("商品", "详情")
+    private val titles = arrayOf("商品", "详情")
 
     override fun getItem(position: Int): Fragment {
-        return when (position) {
-            0 -> GoodsDetailTabOneFragment()
-            else -> GoodsDetailTabTwoFragment()
+        return if (position == 0) {
+            GoodsDetailTabOneFragment()
+        } else {
+            GoodsDetailTabTwoFragment()
         }
     }
 
-    override fun getCount(): Int = titles.size
+    override fun getCount(): Int {
+        return titles.size
+    }
 
-    override fun getPageTitle(position: Int): CharSequence? = titles[position]
+    override fun getPageTitle(position: Int): CharSequence {
+        return titles[position]
+    }
 }
