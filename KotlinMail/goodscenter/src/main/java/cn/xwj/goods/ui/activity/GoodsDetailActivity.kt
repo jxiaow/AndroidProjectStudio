@@ -29,6 +29,7 @@ class GoodsDetailActivity : BaseActivity() {
         setContentView(R.layout.activity_goods_detail)
         initView()
         initObserve()
+        loadCartSize()
     }
 
     /*
@@ -55,6 +56,7 @@ class GoodsDetailActivity : BaseActivity() {
 
         mCartBadge = QBadgeView(this)
     }
+
     /*
         加载购物车数量
      */

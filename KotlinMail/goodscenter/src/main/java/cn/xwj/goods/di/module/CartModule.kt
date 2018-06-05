@@ -3,10 +3,7 @@ package cn.xwj.goods.di.module
 import cn.xwj.baselibrary.di.scope.PerComponentScope
 import cn.xwj.goods.data.repository.CartDataSource
 import cn.xwj.goods.data.repository.CartRepository
-import cn.xwj.goods.data.repository.GoodsDataSource
-import cn.xwj.goods.data.repository.GoodsRepository
-import cn.xwj.goods.presenter.view.GoodsDetailView
-import cn.xwj.goods.presenter.view.GoodsListView
+import cn.xwj.goods.presenter.view.CartListView
 import dagger.Module
 import dagger.Provides
 
@@ -19,9 +16,22 @@ import dagger.Provides
 @Module
 class CartModule {
 
+    private lateinit var cartListView: CartListView
+
+    constructor(cartListView: CartListView){
+        this.cartListView = cartListView
+    }
+
     @Provides
     @PerComponentScope
     fun provideCartRepository(cartRepository: CartRepository): CartDataSource {
         return cartRepository
+    }
+
+
+    @Provides
+    @PerComponentScope
+    fun provideCartListView(cartListView: CartListView): CartListView {
+        return cartListView
     }
 }

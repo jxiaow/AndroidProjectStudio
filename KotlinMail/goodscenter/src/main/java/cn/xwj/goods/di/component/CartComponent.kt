@@ -3,9 +3,8 @@ package cn.xwj.goods.di.component
 import cn.xwj.baselibrary.di.component.ActivityComponent
 import cn.xwj.baselibrary.di.scope.PerComponentScope
 import cn.xwj.goods.di.module.CartModule
-import cn.xwj.goods.di.module.GoodsModule
-import cn.xwj.goods.ui.activity.GoodsActivity
-import cn.xwj.goods.ui.fragment.GoodsDetailTabOneFragment
+import cn.xwj.goods.ui.fragment.CartFragment
+import cn.xwj.goods.ui.fragment.CategoryFragment
 import dagger.Component
 
 /**
@@ -16,9 +15,7 @@ import dagger.Component
  */
 @PerComponentScope
 @Component(dependencies = [ActivityComponent::class],
-        modules = [GoodsModule::class, CartModule::class])
-interface GoodsComponent {
-
-    fun inject(goodsActivity: GoodsActivity)
-    fun inject(goodsDetailTabOneFragment: GoodsDetailTabOneFragment)
+        modules = [CartModule::class])
+interface CartComponent {
+    fun inject(cartFragment: CartFragment)
 }
