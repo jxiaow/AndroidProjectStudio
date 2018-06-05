@@ -18,7 +18,9 @@ class CartModule {
 
     private lateinit var cartListView: CartListView
 
-    constructor(cartListView: CartListView){
+    constructor()
+
+    constructor(cartListView: CartListView) {
         this.cartListView = cartListView
     }
 
@@ -31,7 +33,7 @@ class CartModule {
 
     @Provides
     @PerComponentScope
-    fun provideCartListView(cartListView: CartListView): CartListView {
+    fun provideCartListView(): CartListView {
         return cartListView
     }
 }

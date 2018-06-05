@@ -21,7 +21,6 @@ import javax.inject.Inject
  * Description: BaseMvpFragment: .
  */
 abstract class BaseMvpFragment<T : BasePresenter<*>> : BaseFragment(), BaseView {
-
     @Inject
     lateinit var mPresenter: T
 

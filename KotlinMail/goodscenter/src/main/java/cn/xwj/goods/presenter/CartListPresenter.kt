@@ -9,15 +9,11 @@ import javax.inject.Inject
  * Author: xw
  * Email:i.xiaowujiang@gmail.com
  * Date: 2018-06-03 2018/6/3
- * Description: CategoryPresenter
+ * Description: CartListPresenter
  */
 class CartListPresenter @Inject constructor() : BasePresenter<CartListView>() {
 
 
     @Inject
     lateinit var repository: CartDataSource
-
-    fun getGoodsList(categoryId: Int, pageNo: Int) {
-
-    }
 }

@@ -6,11 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import cn.xwj.baselibrary.ui.fragment.BaseMvpFragment
 import cn.xwj.goods.R
-import cn.xwj.goods.data.protocol.CartGoods
-import cn.xwj.goods.di.component.DaggerCartComponent
-import cn.xwj.goods.di.component.DaggerCategoryComponent
-import cn.xwj.goods.di.module.CartModule
-import cn.xwj.goods.di.module.CategoryModule
 import cn.xwj.goods.presenter.CartListPresenter
 import cn.xwj.goods.presenter.view.CartListView
 
@@ -21,9 +16,7 @@ import cn.xwj.goods.presenter.view.CartListView
  * Description: CategoryFragment
  */
 class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
-    override fun onGetCartListResult(result: MutableList<CartGoods>?) {
 
-    }
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -41,10 +34,6 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
     }
 
     override fun injectComponent() {
-        DaggerCartComponent.builder().activityComponent(mActivityComponent)
-                .cartModule(CartModule(this))
-                .build().inject(this)
-
     }
 
 }

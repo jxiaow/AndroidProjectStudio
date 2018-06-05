@@ -14,6 +14,7 @@ import cn.xwj.goods.R
 import cn.xwj.goods.common.GoodsConstants
 import cn.xwj.goods.data.protocol.Goods
 import cn.xwj.goods.di.component.DaggerGoodsComponent
+import cn.xwj.goods.di.module.CartModule
 import cn.xwj.goods.di.module.GoodsModule
 import cn.xwj.goods.event.AddCartEvent
 import cn.xwj.goods.event.SkuChangedEvent
@@ -119,6 +120,7 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), Goods
         DaggerGoodsComponent.builder()
                 .activityComponent(mActivityComponent)
                 .goodsModule(GoodsModule(this))
+                .cartModule(CartModule())
                 .build().inject(this)
     }
 

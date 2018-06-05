@@ -11,6 +11,4 @@ import cn.xwj.goods.data.protocol.CartGoods
  */
 
 interface CartListView : BaseView {
-    //获取购物车列表
-    fun onGetCartListResult(result: MutableList<CartGoods>?)
 }
