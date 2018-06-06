@@ -13,6 +13,7 @@ import cn.xwj.provider.ext.afterLogin
 import com.eightbitlab.rxbus.Bus
 import com.eightbitlab.rxbus.registerInBus
 import kotlinx.android.synthetic.main.activity_goods_detail.*
+import org.jetbrains.anko.startActivity
 import q.rorbin.badgeview.QBadgeView
 
 /**
@@ -47,7 +48,7 @@ class GoodsDetailActivity : BaseActivity() {
         }
 
         mEnterCartTv.setOnClickListener {
-            //            startActivity<CartActivity>()
+            startActivity<CartActivity>()
         }
 
         mLeftIv.setOnClickListener {

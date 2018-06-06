@@ -12,7 +12,7 @@ import cn.xwj.goods.R
 import cn.xwj.goods.common.GoodsConstants
 import cn.xwj.goods.data.protocol.GoodsSku
 import cn.xwj.goods.event.SkuChangedEvent
-import cn.xwj.goods.utils.YuanFenConverter
+import cn.xwj.baselibrary.utils.YuanFenConverter
 import com.eightbitlab.rxbus.Bus
 import kotlinx.android.synthetic.main.layout_sku_pop.view.*
 import org.jetbrains.anko.editText

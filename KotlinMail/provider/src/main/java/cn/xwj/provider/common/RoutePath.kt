@@ -25,4 +25,19 @@ object RoutePath {
             const val SEARCH_GOODS_BY_KEYWORD = "$PATH/searchGoodsByKeyWord"
         }
     }
+
+    class OrderCenter {
+        companion object {
+            private const val PATH = "/orderCenter"
+            const val PATH_ORDER_CONFIRM = "$PATH/orderConfirm"
+        }
+    }
+
+    class PaySDK {
+        companion object {
+            private const val PATH = "/paySDK"
+            const val PATH_PAY = "$PATH/pay"
+        }
+
+    }
 }

@@ -1,4 +1,4 @@
-package cn.xwj.goods.utils
+package cn.xwj.baselibrary.utils
 
 import java.math.BigDecimal
 
@@ -66,7 +66,7 @@ object YuanFenConverter {
                 }
                 result.append(intString.substring(intString.length - i, intString.length - i + 1))
             }
-            result.reverse().append(".").append(amString.substring(amString.length - 2))
+            result.reverse().append("").append(amString.substring(amString.length - 2))
         }
         if (flag == 1) {
             return "-" + result.toString()
@@ -112,17 +112,17 @@ object YuanFenConverter {
      */
     fun changeY2F(amount: String): String {
         val currency = amount.replace("\\$|\\¥|\\,".toRegex(), "")
-        val index = currency.indexOf(".")
+        val index = currency.indexOf("")
         val length = currency.length
         var amLong: Long? = 0L
         if (index == -1) {
             amLong = java.lang.Long.valueOf(currency + "00")
         } else if (length - index >= 3) {
-            amLong = java.lang.Long.valueOf(currency.substring(0, index + 3).replace(".", ""))
+            amLong = java.lang.Long.valueOf(currency.substring(0, index + 3).replace("", ""))
         } else if (length - index == 2) {
-            amLong = java.lang.Long.valueOf(currency.substring(0, index + 2).replace(".", "") + 0)
+            amLong = java.lang.Long.valueOf(currency.substring(0, index + 2).replace("", "") + 0)
         } else {
-            amLong = java.lang.Long.valueOf(currency.substring(0, index + 1).replace(".", "") + "00")
+            amLong = java.lang.Long.valueOf(currency.substring(0, index + 1).replace("", "") + "00")
         }
         return amLong!!.toString()
     }
@@ -131,6 +131,6 @@ object YuanFenConverter {
         分 转换为 元，带单位
      */
     fun changeF2YWithUnit(amount: Long): String {
-        return "¥${YuanFenConverter.changeF2Y(amount)}"
+        return "¥${changeF2Y(amount)}"
     }
 }

@@ -1,5 +1,6 @@
 package cn.xwj.goods.data.repository
 
+import cn.xwj.goods.data.protocol.CartGoods
 import io.reactivex.Observable
 
 /**
@@ -11,4 +12,8 @@ import io.reactivex.Observable
 interface CartDataSource {
     fun addCart(goodsId: Int, goodsDesc: String, goodsIcon: String, goodsPrice: Long,
                 goodsCount: Int, goodsSku: String): Observable<Int>
+
+    fun getCartList(): Observable<MutableList<CartGoods>?>
+    fun deleteCartList(list: List<Int>): Observable<Boolean>
+    fun submitCart(list: MutableList<CartGoods>, totalPrice: Long): Observable<Int>
 }

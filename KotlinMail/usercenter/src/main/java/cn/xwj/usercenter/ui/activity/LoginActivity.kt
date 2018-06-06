@@ -7,7 +7,6 @@ import cn.xwj.baselibrary.ext.enable
 import cn.xwj.baselibrary.ui.activity.BaseMvpActivity
 import cn.xwj.provider.common.RoutePath
 import cn.xwj.usercenter.R
-import cn.xwj.usercenter.R.id.*
 import cn.xwj.usercenter.di.component.DaggerUserComponent
 import cn.xwj.usercenter.di.module.UserModule
 import cn.xwj.usercenter.presenter.LoginPresenter
@@ -24,7 +23,7 @@ import org.jetbrains.anko.toast
 class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView, View.OnClickListener {
     override fun onLoginResult(result: String) {
         toast(result)
-        startActivity<UserInfoActivity>()
+        finish()
     }
 
 

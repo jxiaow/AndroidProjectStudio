@@ -6,18 +6,12 @@ package cn.xwj.goods.data.protocol
  * Description: Goods: .
  */
 data class CartGoods(
-        val id: Int,//商品ID
-        val categoryId: Int,//分类ID
+        val id: Int,//购物车单项商品ID
+        val goodsId:Int,//具体商品ID
         val goodsDesc: String,//商品描述
-        val goodsDefaultIcon: String,//默认图标
-        val goodsDefaultPrice: Long,//默认价格
-        val goodsDetailOne: String,//商品详情一图
-        val goodsDetailTwo: String,//商品详情二图
-        val goodsSalesCount: Int,//商品销量
-        val goodsStockCount: Int,//商品剩余量
-        val goodsCode: String,//商品编号
-        val goodsDefaultSku: String,//默认SKU
-        val goodsBanner: String,//商品banner图
-        val goodsSku:List<GoodsSku>,//商品SKU
-        val maxPage:Int//最大页码
+        val goodsIcon: String,//商品图片
+        val goodsPrice: Long,//商品价格
+        var goodsCount: Int,//商品数量
+        val goodsSku:String,//商品SKU
+        var isSelected:Boolean//是否选中
 )

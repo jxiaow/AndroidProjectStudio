@@ -1,0 +1,8 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="cn.xwj.order">
+
+    <application>
+        <activity android:name=".ui.activity.OrderActivity" />
+        <activity android:name="com.kotlin.order.ui.activity.OrderConfirmActivity" />
+    </application>
+</manifest>

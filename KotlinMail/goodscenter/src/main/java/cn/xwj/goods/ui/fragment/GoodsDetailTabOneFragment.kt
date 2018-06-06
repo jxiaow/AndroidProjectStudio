@@ -17,13 +17,14 @@ import cn.xwj.goods.di.component.DaggerGoodsComponent
 import cn.xwj.goods.di.module.CartModule
 import cn.xwj.goods.di.module.GoodsModule
 import cn.xwj.goods.event.AddCartEvent
+import cn.xwj.goods.event.GoodsDetailImageEvent
 import cn.xwj.goods.event.SkuChangedEvent
 import cn.xwj.goods.event.UpdateCartSizeEvent
 import cn.xwj.goods.presenter.GoodsDetailPresenter
 import cn.xwj.goods.presenter.view.GoodsDetailView
 import cn.xwj.goods.ui.activity.GoodsDetailActivity
 import cn.xwj.goods.ui.widget.GoodsSkuPopView
-import cn.xwj.goods.utils.YuanFenConverter
+import cn.xwj.baselibrary.utils.YuanFenConverter
 import com.eightbitlab.rxbus.Bus
 import com.eightbitlab.rxbus.registerInBus
 import com.youth.banner.BannerConfig
@@ -137,6 +138,8 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), Goods
         mGoodsDescTv.text = result.goodsDesc
         mGoodsPriceTv.text = YuanFenConverter.changeF2YWithUnit(result.goodsDefaultPrice)
         mSkuSelectedTv.text = result.goodsDefaultSku
+
+        Bus.send(GoodsDetailImageEvent(result.goodsDetailOne, result.goodsDetailTwo))
 
         loadPopData(result)
     }

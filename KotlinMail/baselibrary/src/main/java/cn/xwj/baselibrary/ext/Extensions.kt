@@ -41,8 +41,8 @@ var EditText.content: String
     set(value) = this.setText(value)
 
 
-fun View.setVisiable(visiable: Boolean) {
-    this.visibility = if (visiable) View.VISIBLE else View.GONE
+fun View.setVisible(visible: Boolean) {
+    this.visibility = if (visible) View.VISIBLE else View.GONE
 }
 
 fun Button.enable(editText: EditText, f: () -> Boolean) {

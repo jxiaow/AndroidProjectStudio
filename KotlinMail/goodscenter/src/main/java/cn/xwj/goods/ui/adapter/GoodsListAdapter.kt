@@ -8,7 +8,7 @@ import cn.xwj.baselibrary.ext.loadUrl
 import cn.xwj.baselibrary.ui.adapter.BaseRecyclerViewAdapter
 import cn.xwj.goods.R
 import cn.xwj.goods.data.protocol.Goods
-import cn.xwj.goods.utils.YuanFenConverter
+import cn.xwj.baselibrary.utils.YuanFenConverter
 import kotlinx.android.synthetic.main.layout_goods_item.view.*
 
 /**

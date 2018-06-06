@@ -3,6 +3,7 @@ package cn.xwj.goods.ui.activity
 import android.os.Bundle
 import cn.xwj.baselibrary.ui.activity.BaseActivity
 import cn.xwj.goods.R
+import cn.xwj.goods.ui.fragment.CartFragment
 
 /**
  * Author: xw
@@ -16,6 +17,8 @@ class CartActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart)
 
+        val fragment = supportFragmentManager.findFragmentById(R.id.fragment_cart)
+        (fragment as CartFragment).setBackVisible(true)
 
     }
 }

@@ -8,12 +8,15 @@ import cn.xwj.baselibrary.ext.loadUrl
 import cn.xwj.baselibrary.ui.fragment.BaseFragment
 import cn.xwj.baselibrary.utils.AppPreferences
 import cn.xwj.kotlinmail.R
+import cn.xwj.kotlinmail.ui.activity.SettingActivity
 import cn.xwj.provider.common.RoutePath
 import cn.xwj.provider.ext.afterLogin
 import cn.xwj.provider.ext.isLogin
 import com.alibaba.android.arouter.launcher.ARouter
 import com.kotlin.provider.common.ProviderConstant
 import kotlinx.android.synthetic.main.fragment_me.*
+import org.jetbrains.anko.support.v4.startActivity
+import org.jetbrains.anko.support.v4.toast
 
 /**
  * Author: xw
@@ -21,15 +24,7 @@ import kotlinx.android.synthetic.main.fragment_me.*
  * Description: HomeFragment: .
  */
 class MyFragment : BaseFragment(), View.OnClickListener {
-    override fun onClick(v: View) {
-        when (v.id) {
-            R.id.mUserIconIv, R.id.mUserNameTv ->
-                afterLogin {
-                    ARouter.getInstance().build(RoutePath.UserCenter.USER_INFO_PATH)
-                }
 
-        }
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_me, container, false)
@@ -40,9 +35,8 @@ class MyFragment : BaseFragment(), View.OnClickListener {
         initView()
     }
 
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onStart() {
+        super.onStart()
         loadData()
     }
 
@@ -65,8 +59,37 @@ class MyFragment : BaseFragment(), View.OnClickListener {
 
     }
 
+    /*
+        初始化视图
+     */
     private fun initView() {
         mUserIconIv.setOnClickListener(this)
         mUserNameTv.setOnClickListener(this)
+
+        mWaitPayOrderTv.setOnClickListener(this)
+        mWaitConfirmOrderTv.setOnClickListener(this)
+        mCompleteOrderTv.setOnClickListener(this)
+        mAllOrderTv.setOnClickListener(this)
+        mAddressTv.setOnClickListener(this)
+        mShareTv.setOnClickListener(this)
+        mSettingTv.setOnClickListener(this)
+
     }
+
+    override fun onClick(v: View) {
+        when (v.id) {
+            R.id.mUserIconIv, R.id.mUserNameTv ->
+                afterLogin {
+                    ARouter.getInstance().build(RoutePath.UserCenter.USER_INFO_PATH).navigation()
+                }
+
+            R.id.mShareTv -> {
+                toast(R.string.coming_soon_tip)
+            }
+            R.id.mSettingTv -> {
+                startActivity<SettingActivity>()
+            }
+        }
+    }
+
 }

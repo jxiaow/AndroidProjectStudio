@@ -39,6 +39,7 @@ class AppPreferences {
         with(sharedPreferences.edit()) {
             when (value) {
                 is String -> putString(key, value)
+                is Int -> putInt(key, value)
                 is Boolean -> putBoolean(key, value)
                 is Long -> putLong(key, value)
                 is Float -> putFloat(key, value)
@@ -53,6 +54,7 @@ class AppPreferences {
         with(sharedPreferences) {
             val res: Any = when (default) {
                 is String -> getString(key, default)
+                is Int -> getInt(key, default)
                 is Boolean -> getBoolean(key, default)
                 is Long -> getLong(key, default)
                 is Float -> getFloat(key, default)

@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import cn.xwj.baselibrary.ext.content
-import cn.xwj.baselibrary.ext.setVisiable
+import cn.xwj.baselibrary.ext.setVisible
 import cn.xwj.baselibrary.ui.activity.BaseActivity
 import cn.xwj.baselibrary.utils.AppPreferences
 import cn.xwj.goods.R
@@ -37,8 +37,8 @@ class SearchGoodsActivity : BaseActivity(), View.OnClickListener {
     private fun loadData() {
         val mutableSet = AppPreferences.instance
                 .getStringSet(GoodsConstants.SP_SEARCH_HISTORY, mutableSetOf())
-        mDataView.setVisiable(mutableSet.isNotEmpty())
-        mNoDataTv.setVisiable(mutableSet.isEmpty())
+        mDataView.setVisible(mutableSet.isNotEmpty())
+        mNoDataTv.setVisible(mutableSet.isEmpty())
         mAdapter.setData(mutableSet.toMutableList())
     }
 

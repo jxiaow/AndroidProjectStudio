@@ -4,7 +4,6 @@ import cn.xwj.baselibrary.di.component.ActivityComponent
 import cn.xwj.baselibrary.di.scope.PerComponentScope
 import cn.xwj.goods.di.module.CartModule
 import cn.xwj.goods.ui.fragment.CartFragment
-import cn.xwj.goods.ui.fragment.CategoryFragment
 import dagger.Component
 
 /**
@@ -14,8 +13,7 @@ import dagger.Component
  * Description: CategoryComponent
  */
 @PerComponentScope
-@Component(dependencies = [ActivityComponent::class],
-        modules = [CartModule::class])
+@Component(dependencies = [ActivityComponent::class], modules = [CartModule::class])
 interface CartComponent {
     fun inject(cartFragment: CartFragment)
 }
