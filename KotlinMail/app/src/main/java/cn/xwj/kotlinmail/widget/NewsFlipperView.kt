@@ -39,7 +39,7 @@ class NewsFlipperView @JvmOverloads constructor(context: Context,
         textView.textSize = px2sp(dimen(R.dimen.text_small_size))
         textView.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
         return textView
-    }
+}
 
     /*
         设置公告数据

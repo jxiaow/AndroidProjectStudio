@@ -2,6 +2,7 @@ package cn.xwj.baselibrary.rx
 
 import android.util.Log
 import cn.xwj.baselibrary.presenter.view.BaseView
+import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
@@ -35,4 +36,13 @@ open class BaseSubscriber<T>(val view: BaseView) : Observer<T> {
         disposable?.dispose()
         Log.d("TAG", "disposed: ${disposable?.isDisposed}")
     }
+}
+
+inline fun <T> Observable<T>.subscribe(view: BaseView, crossinline code: (data: T?) -> Unit) {
+    this.subscribe(object : BaseSubscriber<T>(view) {
+        override fun onComplete() {
+            super.onComplete()
+            code(mData)
+        }
+    })
 }

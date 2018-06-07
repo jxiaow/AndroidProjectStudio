@@ -12,6 +12,7 @@ import cn.xwj.order.di.module.OrderModule
 import cn.xwj.order.event.SelectAddressEvent
 import cn.xwj.order.presenter.OrderConfirmPresenter
 import cn.xwj.order.presenter.view.OrderConfirmView
+import cn.xwj.order.ui.activity.ShipAddressActivity
 import cn.xwj.order.ui.adapter.OrderGoodsAdapter
 import cn.xwj.provider.common.RoutePath
 import com.alibaba.android.arouter.facade.annotation.Autowired
@@ -21,6 +22,7 @@ import com.eightbitlab.rxbus.Bus
 import com.eightbitlab.rxbus.registerInBus
 import com.kotlin.provider.common.ProviderConstant
 import kotlinx.android.synthetic.main.activity_order_confirm.*
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
 /*
@@ -48,7 +50,7 @@ class OrderConfirmActivity : BaseMvpActivity<OrderConfirmPresenter>(), OrderConf
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_order_confirm)
-
+        ARouter.getInstance().inject(this)
         initView()
         initObserve()
         loadData()
@@ -59,10 +61,10 @@ class OrderConfirmActivity : BaseMvpActivity<OrderConfirmPresenter>(), OrderConf
      */
     private fun initView() {
         mShipView.setOnClickListener {
-            //            startActivity<ShipAddressActivity>()
+            startActivity<ShipAddressActivity>()
         }
         mSelectShipTv.setOnClickListener {
-            //            startActivity<ShipAddressActivity>()
+            startActivity<ShipAddressActivity>()
         }
 
         mSubmitOrderBtn.setOnClickListener {
@@ -108,7 +110,6 @@ class OrderConfirmActivity : BaseMvpActivity<OrderConfirmPresenter>(), OrderConf
         mCurrentOrder = result
         mAdapter.setData(result.orderGoodsList)
         mTotalPriceTv.text = "合计：${YuanFenConverter.changeF2YWithUnit(result.totalPrice)}"
-
         updateAddressView()
     }
 

@@ -10,8 +10,10 @@ import android.widget.ImageView
 import cn.xwj.baselibrary.R
 import cn.xwj.baselibrary.common.BaseConstants.Companion.REQUEST_SUCCESS
 import cn.xwj.baselibrary.data.protocol.BaseResp
+import cn.xwj.baselibrary.presenter.view.BaseView
 import cn.xwj.baselibrary.rx.BaseException
 import cn.xwj.baselibrary.rx.BaseSubscriber
+import cn.xwj.baselibrary.rx.subscribe
 import cn.xwj.baselibrary.utils.GlideUtils
 import cn.xwj.baselibrary.widget.DefaultTextWatcher
 import com.kennyc.view.MultiStateView
@@ -82,6 +84,15 @@ fun <T> Observable<T>.execute(subscriber: BaseSubscriber<T>, owner: LifecycleOwn
             .observeOn(AndroidSchedulers.mainThread())
             .bindToLifecycle(owner)
             .subscribe(subscriber)
+}
+
+inline fun <T, V : BaseView> Observable<T>.execute(view: V, owner: LifecycleOwner,
+                                                   crossinline code: (t: T?) -> Unit) {
+    this.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .bindToLifecycle(owner)
+            .subscribe(view, code)
+
 }
 
 fun ImageView.loadUrl(url: String) {

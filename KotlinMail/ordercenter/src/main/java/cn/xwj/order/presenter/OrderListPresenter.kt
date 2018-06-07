@@ -2,8 +2,6 @@ package cn.xwj.order.presenter
 
 import cn.xwj.baselibrary.ext.execute
 import cn.xwj.baselibrary.presenter.BasePresenter
-import cn.xwj.baselibrary.rx.BaseSubscriber
-import cn.xwj.order.data.protocol.Order
 import cn.xwj.order.data.repository.OrderDataSource
 import cn.xwj.order.presenter.view.OrderListView
 import javax.inject.Inject
@@ -27,12 +25,10 @@ class OrderListPresenter @Inject constructor() : BasePresenter<OrderListView>() 
     fun getOrderList(orderStatus: Int) {
 
         mView.showLoading()
-        orderRepository.getOrderList(orderStatus).execute(object : BaseSubscriber<MutableList<Order>?>(mView) {
-            override fun onNext(t: MutableList<Order>?) {
-                mView.onGetOrderListResult(t)
-            }
-        }, lifecycleOwner)
-
+        orderRepository.getOrderList(orderStatus)
+                .execute(mView, lifecycleOwner) {
+                    mView.onGetOrderListResult(it)
+                }
     }
 
     /*
@@ -40,11 +36,9 @@ class OrderListPresenter @Inject constructor() : BasePresenter<OrderListView>() 
      */
     fun confirmOrder(orderId: Int) {
         mView.showLoading()
-        orderRepository.confirmOrder(orderId).execute(object : BaseSubscriber<Boolean>(mView) {
-            override fun onNext(t: Boolean) {
-                mView.onConfirmOrderResult(t)
-            }
-        }, lifecycleOwner)
+        orderRepository.confirmOrder(orderId).execute(mView, lifecycleOwner) {
+            mView.onConfirmOrderResult(it!!)
+        }
 
     }
 
@@ -53,11 +47,9 @@ class OrderListPresenter @Inject constructor() : BasePresenter<OrderListView>() 
      */
     fun cancelOrder(orderId: Int) {
         mView.showLoading()
-        orderRepository.cancelOrder(orderId).execute(object : BaseSubscriber<Boolean>(mView) {
-            override fun onNext(t: Boolean) {
-                mView.onCancelOrderResult(t)
-            }
-        }, lifecycleOwner)
+        orderRepository.cancelOrder(orderId).execute(mView, lifecycleOwner) {
+            mView.onCancelOrderResult(it!!)
+        }
 
     }
 

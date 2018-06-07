@@ -26,11 +26,9 @@ class OrderConfirmPresenter @Inject constructor() : BasePresenter<OrderConfirmVi
      */
     fun getOrderById(orderId: Int) {
         mView.showLoading()
-        orderRepository.getOrderById(orderId).execute(object : BaseSubscriber<Order>(mView) {
-            override fun onComplete() {
-                mView.onGetOrderByIdResult(mData!!)
-            }
-        }, lifecycleOwner)
+        orderRepository.getOrderById(orderId).execute(mView, lifecycleOwner) {
+            mView.onGetOrderByIdResult(it!!)
+        }
 
     }
 
@@ -38,15 +36,9 @@ class OrderConfirmPresenter @Inject constructor() : BasePresenter<OrderConfirmVi
         提交订单
      */
     fun submitOrder(order: Order) {
-
         mView.showLoading()
-        orderRepository.submitOrder(order).execute(object : BaseSubscriber<Boolean>(mView) {
-            override fun onComplete() {
-                mView.onSubmitOrderResult(mData!!)
-            }
-        }, lifecycleOwner)
-
+        orderRepository.submitOrder(order).execute(mView, lifecycleOwner) {
+            mView.onSubmitOrderResult(it!!)
+        }
     }
-
-
 }

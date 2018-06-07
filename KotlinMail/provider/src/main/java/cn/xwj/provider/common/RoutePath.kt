@@ -39,5 +39,11 @@ object RoutePath {
             const val PATH_PAY = "$PATH/pay"
         }
 
+    }class MessageCenter {
+        companion object {
+            private const val PATH = "/messageCenter"
+            const val PATH_MESSAGE_ORDER = "$PATH/path_message_order"
+        }
+
     }
 }

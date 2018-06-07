@@ -91,7 +91,7 @@ class OrderFragment : BaseMvpFragment<OrderListPresenter>(), OrderListView {
                         mPresenter.confirmOrder(order.id)
                     }
                     OrderConstant.OPT_ORDER_CANCEL -> {
-                        //mPresenter.cancelOrder(order.id)
+                        mPresenter.cancelOrder(order.id)
                         showCancelDialog(order)
                     }
                 }

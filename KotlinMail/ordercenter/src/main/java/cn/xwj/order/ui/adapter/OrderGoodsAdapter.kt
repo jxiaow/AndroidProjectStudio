@@ -9,8 +9,9 @@ import cn.xwj.baselibrary.ext.loadUrl
 import cn.xwj.baselibrary.ui.adapter.BaseRecyclerViewAdapter
 import cn.xwj.baselibrary.utils.YuanFenConverter
 import cn.xwj.order.R
+
 import cn.xwj.order.data.protocol.OrderGoods
-import kotlinx.android.synthetic.main.layout_order_goods_item.view.*
+import kotlinx.android.synthetic.main.layout_order_item.view.*
 
 /**
  * Author: xw
@@ -34,13 +35,12 @@ class OrderGoodsAdapter(val context: Context)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         super.onBindViewHolder(holder, position)
         val model = dataList[position]
-
-        holder.itemView.mGoodsIconIv.loadUrl(model.goodsIcon)
-        holder.itemView.mGoodsDescTv.text = model.goodsDesc
-        holder.itemView.mGoodsSkuTv.text = model.goodsSku
-        holder.itemView.mGoodsPriceTv.text = YuanFenConverter.changeF2YWithUnit(model.goodsPrice)
-        holder.itemView.mGoodsCountTv.text = "x${model.goodsCount}"
-
+        with(holder.itemView) {
+            mGoodsIconIv.loadUrl(model.goodsIcon)
+            mGoodsDescTv.text = model.goodsDesc
+            mGoodsPriceTv.text = YuanFenConverter.changeF2YWithUnit(model.goodsPrice)
+            mGoodsCountTv.text = "x${model.goodsCount}"
+        }
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view)

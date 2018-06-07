@@ -9,6 +9,10 @@ import cn.xwj.baselibrary.ui.fragment.BaseFragment
 import cn.xwj.baselibrary.utils.AppPreferences
 import cn.xwj.kotlinmail.R
 import cn.xwj.kotlinmail.ui.activity.SettingActivity
+import cn.xwj.order.common.OrderConstant
+import cn.xwj.order.common.OrderStatus
+import cn.xwj.order.ui.activity.OrderActivity
+import cn.xwj.order.ui.activity.ShipAddressActivity
 import cn.xwj.provider.common.RoutePath
 import cn.xwj.provider.ext.afterLogin
 import cn.xwj.provider.ext.isLogin
@@ -83,6 +87,33 @@ class MyFragment : BaseFragment(), View.OnClickListener {
                     ARouter.getInstance().build(RoutePath.UserCenter.USER_INFO_PATH).navigation()
                 }
 
+            R.id.mShareTv -> {
+                toast(R.string.coming_soon_tip)
+            }
+            R.id.mSettingTv -> {
+                startActivity<SettingActivity>()
+            }
+
+            R.id.mWaitPayOrderTv -> {
+                startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_WAIT_PAY)
+            }
+            R.id.mWaitConfirmOrderTv -> {
+                startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_WAIT_CONFIRM)
+            }
+            R.id.mCompleteOrderTv -> {
+                startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_COMPLETED)
+            }
+            R.id.mAllOrderTv -> {
+                afterLogin {
+                    startActivity<OrderActivity>()
+                }
+            }
+
+            R.id.mAddressTv -> {
+                afterLogin {
+                    startActivity<ShipAddressActivity>()
+                }
+            }
             R.id.mShareTv -> {
                 toast(R.string.coming_soon_tip)
             }

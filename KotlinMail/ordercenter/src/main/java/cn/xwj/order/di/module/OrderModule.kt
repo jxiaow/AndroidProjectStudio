@@ -4,6 +4,7 @@ import cn.xwj.baselibrary.di.scope.PerComponentScope
 import cn.xwj.order.data.repository.OrderDataSource
 import cn.xwj.order.data.repository.OrderRepository
 import cn.xwj.order.presenter.view.OrderConfirmView
+import cn.xwj.order.presenter.view.OrderDetailView
 import cn.xwj.order.presenter.view.OrderListView
 import dagger.Module
 import dagger.Provides
@@ -19,9 +20,14 @@ class OrderModule {
 
     private lateinit var orderListView: OrderListView
     private lateinit var orderConfirmView: OrderConfirmView
+    private lateinit var orderDetailView: OrderDetailView
 
     constructor(orderConfirmView: OrderConfirmView) {
         this.orderConfirmView = orderConfirmView
+    }
+
+    constructor(orderDetailView: OrderDetailView) {
+        this.orderDetailView = orderDetailView
     }
 
     constructor(orderListView: OrderListView) {
@@ -45,5 +51,11 @@ class OrderModule {
     @PerComponentScope
     fun provideOrderConfirmView(): OrderConfirmView {
         return orderConfirmView
+    }
+
+    @Provides
+    @PerComponentScope
+    fun provideOrderDetailView(): OrderDetailView {
+        return orderDetailView
     }
 }

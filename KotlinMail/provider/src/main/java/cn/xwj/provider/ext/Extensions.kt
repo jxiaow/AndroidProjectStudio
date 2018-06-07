@@ -15,7 +15,7 @@ import com.alibaba.android.arouter.launcher.ARouter
 fun isLogin(): Boolean = AppPreferences.instance
         .get(BaseConstants.KEY_SP_TOKEN, "").isNotEmpty()
 
-fun afterLogin(code: () -> Unit) {
+inline fun afterLogin(code: () -> Unit) {
 
     if (isLogin()) {
         code()

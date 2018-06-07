@@ -16,7 +16,6 @@ import cn.xwj.order.common.OrderStatus
 import cn.xwj.order.data.protocol.Order
 import kotlinx.android.synthetic.main.layout_order_item.view.*
 import org.jetbrains.anko.dip
-import org.jetbrains.anko.sdk25.coroutines.onClick
 
 /**
  * Author: xw
@@ -103,24 +102,18 @@ class OrderAdapter(val context: Context) : BaseRecyclerViewAdapter<Order, OrderA
         }
 
         //设置确认收货点击事件
-        holder.itemView.mConfirmBtn.onClick {
-            listener?.let {
-                it.onOptClick(OrderConstant.OPT_ORDER_CONFIRM,model)
-            }
+        holder.itemView.mConfirmBtn.setOnClickListener {
+            listener?.onOptClick(OrderConstant.OPT_ORDER_CONFIRM,model)
         }
 
         //设置支付订单点击事件
-        holder.itemView.mPayBtn.onClick {
-            listener?.let {
-                it.onOptClick(OrderConstant.OPT_ORDER_PAY,model)
-            }
+        holder.itemView.mPayBtn.setOnClickListener {
+            listener?.onOptClick(OrderConstant.OPT_ORDER_PAY,model)
         }
 
         //设置取消订单点击事件
-        holder.itemView.mCancelBtn.onClick {
-            listener?.let {
-                it.onOptClick(OrderConstant.OPT_ORDER_CANCEL,model)
-            }
+        holder.itemView.mCancelBtn.setOnClickListener {
+            listener?.onOptClick(OrderConstant.OPT_ORDER_CANCEL,model)
         }
 
 
